@@ -62,7 +62,7 @@ const SocialIcon = styled.a`
 
 const Copyright = styled.div`
   border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 30px;
+  padding-top: 40px;
   margin-top: 40px;
   text-align: center;
   color: #aaa;
