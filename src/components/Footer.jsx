@@ -14,7 +14,7 @@ const FooterContainer = styled.footer`
 
 const FooterTitle = styled.h5`
   font-weight: 600;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   position: relative;
   
   &:after {
