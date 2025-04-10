@@ -180,7 +180,7 @@ const CampaignsSection = () => (
         </Col>
       </Row>
     </Container><br />
-    import React from "react";
+    
 
     const VisionMission = ()= {
       (
