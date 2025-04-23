@@ -4,8 +4,10 @@ import styled from 'styled-components';
 import { Carousel } from "react-bootstrap";
 
 
+
+
 const Section = styled.section`
-  padding: 6rem 0;
+  padding: 6rem 0;njbccfx
   background: #F8F9FA;
 `;
 
@@ -179,94 +181,10 @@ const CampaignsSection = () => (
           </Card>
         </Col>
       </Row>
-    </Container><br />
-    
-
-    const VisionMission = ()= {
-      (
-        <div className="container-fluid py-5" style={{ objectFit: "cover" }}>
-          <div className="container py-5 text-center">
-            h1
-            <div className="container mt-4">
-              <div className="row justify-content-center gap-5">
-                {/* Vision Box */}
-                <div
-                  className="col-md-5 p-4 d-flex flex-column align-items-center"
-                  style={{
-                    color: "black",
-                    border: "1px solid red",
-                    backgroundColor: "whitesmoke",
-                    borderRadius: "10px",
-
-                  }}
-                >
-                  <div className="service-item text-center">
-                    <div className="service-link">
-                      <a
-                        href="#"
-                        className="h3 mb-3"
-                        style={{
-                          color: "red",
-                          borderBottom: "2px solid red",
-                          textDecoration: "none",
-                        }}
-                      >
-                        Vision
-                      </a>
-                    </div>
-                  </div>
-                  <p className="mt-3 text-justify">
-                    At SheWings Foundation, we envision a world where every person—regardless of gender,
-                    economic background, or social status—has access to essential health knowledge,
-                    resources, and support. Our long-term vision is to foster an inclusive, informed, and
-                    empowered society in which healthcare is not a privilege but a universal right.
-                  </p>
-                </div>
-
-                {/* Mission Box */}
-                <div
-                  className="col-md-5 p-4 d-flex flex-column align-items-center"
-                  style={{
-                    color: "black",
-                    border: "1px solid red",
-                    backgroundColor: "whitesmoke",
-                    borderRadius: "10px",
-                  }}
-                >
-                  <div className="service-item text-center">
-                    <div className="service-link">
-                      <a
-                        href="#"
-                        className="h3 mb-3"
-                        style={{
-                          color: "red",
-                          borderBottom: "2px solid red",
-                          textDecoration: "none",
-                        }}
-                      >
-                        Mission
-                      </a>
-                    </div>
-                  </div>
-                  <p className="mt-3 text-justify">
-                    At SheWings Foundation, our mission is to empower individuals and communities with the
-                    knowledge and resources needed for a healthier life. We strive to eliminate stigmas
-                    surrounding women’s health issues and ensure that health education is accessible to all,
-                    from young adults to seniors, in both urban and rural areas.
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    };
-
-    export default VisionMission;
+    </Container>
 
   </Section>
-
-
 );
 
 export default CampaignsSection;
+

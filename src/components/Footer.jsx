@@ -1,141 +1,83 @@
 import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import styled from 'styled-components';
-
-const FooterContainer = styled.footer`
-  background-color: #1a1a1a;
-  color: #fff;
-  padding: 60px 0 20px;
-  
-  @media (max-width: 768px) {
-    padding: 40px 0 20px;
-  }
-`;
-
-const FooterTitle = styled.h5`
-  font-weight: 600;
-  margin-bottom: 30px;
-  position: relative;
-  
-  &:after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -10px;
-    width: 40px;
-    height: 2px;
-    background-color: #FF4B6E;
-  }
-`;
-
-const FooterLink = styled.a`
-  color: #ccc;
-  text-decoration: none;
-  display: block;
-  margin-bottom: 10px;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    color: #FF4B6E;
-    transform: translateX(5px);
-  }
-`;
-
-const SocialIcon = styled.a`
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  width: 36px;
-  height: 36px;
-  border-radius: 50%;
-  background-color: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  margin-right: 10px;
-  transition: all 0.3s ease;
-  
-  &:hover {
-    background-color: #FF4B6E;
-    color: #fff;
-    transform: translateY(-3px);
-  }
-`;
-
-const Copyright = styled.div`
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding-top: 30px;
-  margin-top: 40px;
-  text-align: center;
-  color: #aaa;
-  font-size: 0.9rem;
-`;
+import './Footer.css';
 
 const Footer = () => {
   return (
-    <FooterContainer>
-      <Container>
-        <Row>
-          <Col lg={4} md={6} className="mb-4 mb-md-0">
-            <FooterTitle>About SheWings</FooterTitle>
-            <p className="text-muted">
-              SheWings Foundation is dedicated to empowering women's health and wellness through education, support, and community initiatives.
+    <footer className="bg-dark text-white pt-5 pb-3">
+      <div className="container">
+        <div className="row text-start">
+
+          {/* Newsletter */}
+          <div className="col-md-3 mb-4">
+            <h5 className="fw-bold mb-3">Newsletter</h5>
+            <p>
+              We’re open to partnerships with organizations that share our mission of empowering women’s health. Contact us for more information.
             </p>
-            <div className="mt-3">
-              <SocialIcon href="#" aria-label="Facebook">
-                <i className="fab fa-facebook-f"></i>
-              </SocialIcon>
-              <SocialIcon href="#" aria-label="Twitter">
-                <i className="fab fa-twitter"></i>
-              </SocialIcon>
-              <SocialIcon href="#" aria-label="Instagram">
-                <i className="fab fa-instagram"></i>
-              </SocialIcon>
-              <SocialIcon href="#" aria-label="LinkedIn">
-                <i className="fab fa-linkedin-in"></i>
-              </SocialIcon>
+            <div className="input-group">
+              <input type="email" className="form-control" placeholder="Enter your email" />
+              <button className="btn btn-warning fw-bold">SignUp</button>
             </div>
-          </Col>
-          
-          <Col lg={2} md={6} className="mb-4 mb-md-0">
-            <FooterTitle>Quick Links</FooterTitle>
-            <FooterLink href="#about">About Us</FooterLink>
-            <FooterLink href="#campaigns">Campaigns</FooterLink>
-            <FooterLink href="#impact">Our Impact</FooterLink>
-            <FooterLink href="#contact">Contact Us</FooterLink>
-          </Col>
-          
-          <Col lg={3} md={6} className="mb-4 mb-md-0">
-            <FooterTitle>Contact Info</FooterTitle>
-            <p className="text-muted mb-2">
-              <i className="fas fa-map-marker-alt me-2"></i> 123 Foundation Street, City
-            </p>
-            <p className="text-muted mb-2">
-              <i className="fas fa-phone me-2"></i> +1 234 567 890
-            </p>
-            <p className="text-muted mb-2">
-              <i className="fas fa-envelope me-2"></i> info@shewings.org
-            </p>
-          </Col>
-          
-          <Col lg={3} md={6}>
-            <FooterTitle>Newsletter</FooterTitle>
-            <p className="text-muted mb-3">Subscribe to our newsletter for updates and news.</p>
-            <div className="input-group mb-3">
-              <input 
-                type="email" 
-                className="form-control" 
-                placeholder="Your email" 
-                aria-label="Your email" 
-              />
-              <button className="btn btn-primary" type="button">Subscribe</button>
+          </div>
+
+          {/* Quick Links */}
+          <div className="col-md-3 mb-4">
+            <h5 className="fw-bold mb-3">Quick Links</h5>
+            <ul className="list-unstyled">
+              <li><i className="bi bi-chevron-right me-2"></i>About Us</li>
+              <li><i className="bi bi-chevron-right me-2"></i>Our Impact</li>
+              <li><i className="bi bi-chevron-right me-2"></i>Our Vision</li>
+              <li><i className="bi bi-chevron-right me-2"></i>Our Mission</li>
+              <li><i className="bi bi-chevron-right me-2"></i>Our Supporters</li>
+              <li><i className="bi bi-chevron-right me-2"></i>Contact Us</li>
+            </ul>
+          </div>
+
+          {/* Policies */}
+          <div className="col-md-3 mb-4">
+            <h5 className="fw-bold mb-3">Policies</h5>
+            <ul className="list-unstyled">
+              <li><i className="bi bi-chevron-right me-2"></i>Privacy Policy</li>
+              <li><i className="bi bi-chevron-right me-2"></i>Terms & Conditions</li>
+              <li><i className="bi bi-chevron-right me-2"></i>Disclaimer</li>
+              <li><i className="bi bi-chevron-right me-2"></i>Blogs</li>
+            </ul>
+          </div>
+
+          {/* Gallery */}
+          <div className="col-md-3 mb-4">
+            <h5 className="fw-bold mb-3">Our Gallery</h5>
+            <div className="row g-2">
+              {[...Array(6)].map((_, idx) => (
+                <div className="col-4" key={idx}>
+                  <img
+                    src={`https://via.placeholder.com/80?text=Img+${idx + 1}`}
+                    alt={`gallery-${idx + 1}`}
+                    className="img-fluid rounded"
+                  />
+                </div>
+              ))}
             </div>
-          </Col>
-        </Row>
-        
-        <Copyright>
-          <p>&copy; {new Date().getFullYear()} SheWings Foundation. All rights reserved.</p>
-        </Copyright>
-      </Container>
-    </FooterContainer>
+          </div>
+        </div>
+
+        <hr className="border-secondary" />
+
+        <div className="text-center">
+          <p className="mb-0 text-light">
+            <span className="text-warning fw-bold">shewingsfoundation</span>, All right reserved.
+          </p>
+        </div>
+      </div>
+
+      {/* Scroll to top button */}
+      <button
+        onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
+        className="btn btn-warning position-fixed bottom-0 end-0 m-4 shadow"
+        style={{ borderRadius: '50%', zIndex: 9999 }}
+      >
+        ↑
+      </button>
+    </footer>
   );
 };
 
