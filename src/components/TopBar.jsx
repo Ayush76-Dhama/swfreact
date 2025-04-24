@@ -1,6 +1,9 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import styled from 'styled-components';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faEnvelope, faPhone, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import { faFacebookF, faTwitter, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 
 const TopBarWrapper = styled.div`
   background-color: #FF4B6E;
@@ -30,7 +33,7 @@ const ContactInfo = styled.div`
       transform: translateY(-1px);
     }
     
-    i {
+    svg {
       font-size: 0.9rem;
     }
   }
@@ -69,15 +72,15 @@ const TopBar = () => {
           <Col md={8}>
             <ContactInfo>
               <a href="mailto:info@shewings.org">
-                <i className="fas fa-envelope"></i>
+                <FontAwesomeIcon icon={faEnvelope} />
                 info@shewings.org
               </a>
               <a href="tel:+919876543210">
-                <i className="fas fa-phone"></i>
+                <FontAwesomeIcon icon={faPhone} />
                 +91 98765 43210
               </a>
               <a href="#">
-                <i className="fas fa-map-marker-alt"></i>
+                <FontAwesomeIcon icon={faMapMarkerAlt} />
                 New Delhi, India
               </a>
             </ContactInfo>
@@ -85,16 +88,16 @@ const TopBar = () => {
           <Col md={4}>
             <SocialLinks>
               <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-facebook-f"></i>
+                <FontAwesomeIcon icon={faFacebookF} />
               </a>
               <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-twitter"></i>
+                <FontAwesomeIcon icon={faTwitter} />
               </a>
               <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-instagram"></i>
+                <FontAwesomeIcon icon={faInstagram} />
               </a>
               <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
-                <i className="fab fa-linkedin-in"></i>
+                <FontAwesomeIcon icon={faLinkedinIn} />
               </a>
             </SocialLinks>
           </Col>
