@@ -1,11 +1,13 @@
 import React from 'react';
-import { Row, Col, Container, Carousel } from 'react-bootstrap';
+import { Row, Col, Container, Carousel, Button } from 'react-bootstrap';
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
-// Using placeholder images until actual images are added
+// Using different placeholder images for each slide
 // Replace these with your actual images when available
 const slide1 = "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
 const slide2 = "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
+const slide3 = "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
 
 const HeroSection = styled(Row)`
   min-height: 100vh;
@@ -82,7 +84,7 @@ const StyledCarousel = styled(Carousel)`
       left: 0;
       right: 0;
       bottom: 0;
-      // background: rgba(0, 0, 0, 0.3); /* Subtle dark overlay instead of pink gradient */
+      background: rgba(0, 0, 0, 0.4); /* Dark overlay for better text visibility */
     }
   }
 
@@ -137,6 +139,7 @@ const StyledCarousel = styled(Carousel)`
       font-size: 1.5rem;
       line-height: 1.5;
       text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+      margin-bottom: 2rem;
       
       /* Large devices (desktops, 1200px and up) */
       @media (min-width: 1200px) {
@@ -165,10 +168,22 @@ const StyledCarousel = styled(Carousel)`
     }
   }
   
-  /* Hide the navigation arrows */
+  /* Style the navigation arrows */
   .carousel-control-prev,
   .carousel-control-next {
-    display: none;
+    width: 5%;
+    opacity: 0.7;
+    transition: opacity 0.3s ease;
+    
+    &:hover {
+      opacity: 1;
+    }
+    
+    .carousel-control-prev-icon,
+    .carousel-control-next-icon {
+      width: 30px;
+      height: 30px;
+    }
   }
   
   /* Style the indicators */
@@ -180,12 +195,12 @@ const StyledCarousel = styled(Carousel)`
       height: 12px;
       border-radius: 50%;
       margin: 0 6px;
-    //   background-color: rgba(255, 255, 255, 0.5);
+      background-color: rgba(255, 255, 255, 0.5);
       border: none;
       transition: all 0.3s ease;
       
       &:hover {
-        // background-color: rgba(255, 255, 255, 0.8);
+        background-color: rgba(255, 255, 255, 0.8);
       }
       
       &.active {
@@ -207,11 +222,52 @@ const StyledCarousel = styled(Carousel)`
   }
 `;
 
+const HeroButton = styled(Button)`
+  background-color: var(--primary-color);
+  border-color: var(--primary-color);
+  padding: 0.75rem 1.5rem;
+  font-weight: 600;
+  margin-right: 1rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background-color: #e03d5d;
+    border-color: #e03d5d;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  }
+  
+  &.btn-outline-light {
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+      color: white;
+    }
+  }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  
+  @media (max-width: 575px) {
+    flex-direction: column;
+    align-items: center;
+    
+    ${HeroButton} {
+      margin-right: 0;
+      width: 100%;
+      max-width: 250px;
+    }
+  }
+`;
+
 const HeaderSection = () => (
   <HeroSection className="text-white">
     <StyledCarousel 
       indicators={true}
-      controls={false}
+      controls={true}
       interval={5000}
       pause="hover"
       touch={true}
@@ -220,33 +276,45 @@ const HeaderSection = () => (
       <Carousel.Item>
         <img
           src={slide1}
-          alt="First slide"
+          alt="Empowering Women"
         />
         <Carousel.Caption>
-          {/* <h3>Empowering Women</h3>
-          <p>Supporting women's health and wellness initiatives</p> */}
+          <h3>Empowering Women</h3>
+          <p>Supporting women's health and wellness initiatives</p>
+          <ButtonContainer>
+            <HeroButton as={Link} to="/about">Learn More</HeroButton>
+            <HeroButton as={Link} to="/contact" variant="outline-light">Contact Us</HeroButton>
+          </ButtonContainer>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
         <img
           src={slide2}
-          alt="Second slide"
+          alt="Community Impact"
         />
         <Carousel.Caption>
-          {/* <h3>Community Impact</h3>
-          <p>Creating lasting positive change in communities</p> */}
+          <h3>Community Impact</h3>
+          <p>Creating lasting positive change in communities</p>
+          <ButtonContainer>
+            <HeroButton as={Link} to="/impact">Our Impact</HeroButton>
+            <HeroButton as={Link} to="/campaigns" variant="outline-light">Our Campaigns</HeroButton>
+          </ButtonContainer>
         </Carousel.Caption>
       </Carousel.Item>
-      {/* <Carousel.Item>
+      <Carousel.Item>
         <img
           src={slide3}
-          alt="Third slide"
+          alt="Join Our Mission"
         />
         <Carousel.Caption>
           <h3>Join Our Mission</h3>
           <p>Together we can make a difference</p>
+          <ButtonContainer>
+            <HeroButton as={Link} to="/donate">Donate Now</HeroButton>
+            <HeroButton as={Link} to="/contact" variant="outline-light">Get Involved</HeroButton>
+          </ButtonContainer>
         </Carousel.Caption>
-      </Carousel.Item> */}
+      </Carousel.Item>
     </StyledCarousel>
   </HeroSection>
 );

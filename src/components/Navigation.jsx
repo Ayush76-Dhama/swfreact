@@ -2,6 +2,7 @@ import React from 'react';
 import { Navbar, Nav, Container, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 
+
 const TopBar = styled.div`
   background: #FF4B6E;
   padding: 8px 0;
@@ -89,6 +90,13 @@ const DonateButton = styled(Button)`
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(255, 75, 110, 0.2);
   }
+  
+    .logoshe{
+    max-height:60px;
+    width:auto;
+
+    
+    }
 `;
 
 const Navigation = () => {
@@ -124,7 +132,7 @@ const Navigation = () => {
       <StyledNavbar expand="lg" sticky="top">
         <Container>
           <BrandLogo href="/">
-            She<span>Wings</span>
+            <img   className="logoshe"  src="images/img/logo/logo2.jpg" alt="" />
           </BrandLogo>
           <Navbar.Toggle aria-controls="basic-navbar-nav" />
           <Navbar.Collapse id="basic-navbar-nav">
