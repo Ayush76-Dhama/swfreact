@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Tab, Nav } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
+import Join from './Join';
+import { Link, useLocation } from "react-router-dom";
 
 const StyledSection = styled(motion.section)`
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -26,7 +28,8 @@ const ImageContainer = styled(motion.div)`
   border-radius: 20px;
   overflow: hidden;
   box-shadow: 0 20px 40px rgba(0,0,0,0.1);
-  height: 350px;
+  height: 405px;
+  margin-bottom: 1.9rem;
   
   &::after {
     content: '';
@@ -150,6 +153,90 @@ const AboutSection = () => {
                 <p className="mb-0 fst-italic fs-5 text-white">Empowering women, transforming communities</p>
               </div>
             </ImageContainer>
+            
+            
+            <ImageContainer>
+              {!imageLoaded && (
+                <div className="position-absolute top-0 start-0 w-100 h-100 bg-light d-flex align-items-center justify-content-center">
+                  <div className="spinner-border text-primary" role="status">
+                    <span className="visually-hidden">Loading...</span>
+                  </div>
+                </div>
+              )}
+              <img
+                src="/images/img/about-3.jpg"
+                className={!imageLoaded ? 'invisible' : ''}
+                alt="About SheWings Foundation team and mission"
+                onLoad={handleImageLoad}
+                loading="lazy"
+              />
+              <div className="position-absolute bottom-0 start-0 w-100 p-4" style={{ zIndex: 2 }}>
+                <p className="mb-0 fst-italic fs-5 text-white">Empowering women, transforming communities</p>
+              </div>
+            </ImageContainer>
+            
+            {/* Paragraph after images */}
+            {isDirectRoute && (
+              <div>
+                <Join />
+              </div>
+            
+            )}
+    
+            {/* Additional content after images */}
+            <motion.div 
+              className="mt-4 p-4 rounded-3"
+              style={{ 
+                background: 'rgba(255, 255, 255, 0.9)',
+                boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
+                border: '1px solid rgba(255,255,255,0.2)'
+              }}
+              variants={fadeInUp}
+            >
+              <h5 className="fw-bold mb-3" style={{ color: '#6c5ce7' }}>Our Impact</h5>
+              <div className="d-flex justify-content-between mb-3">
+                <div className="text-center">
+                  <h3 className="fw-bold" style={{ 
+                    background: 'linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent'
+                  }}>10K+</h3>
+                  <p className="text-muted mb-0">Women Empowered</p>
+                </div>
+                <div className="text-center">
+                  <h3 className="fw-bold" style={{ 
+                    background: 'linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent'
+                  }}>50+</h3>
+                  <p className="text-muted mb-0">Communities</p>
+                </div>
+                <div className="text-center">
+                  <h3 className="fw-bold" style={{ 
+                    background: 'linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent'
+                  }}>100+</h3>
+                  <p className="text-muted mb-0">Events</p>
+                </div>
+              </div>
+              <div className="text-center mt-3">
+                <motion.a 
+                  className="btn py-2 px-4 rounded-pill" 
+                  href="/impact"
+                  style={{ 
+                    background: 'linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%)',
+                    color: 'white',
+                    boxShadow: '0 4px 15px rgba(108, 92, 231, 0.3)',
+                    border: 'none'
+                  }}
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  View Our Impact
+                </motion.a>
+              </div>
+            </motion.div>
           </motion.div>
           <motion.div className="col-xl-7" variants={fadeInUp}>
             <ContentContainer className="ps-xl-5">

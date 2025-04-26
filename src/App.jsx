@@ -10,6 +10,8 @@ import CampaignsSection from './components/CampaignsSection';
 import Ayu from './components/Ayu';
 import ContactSection from './components/ContactSection';
 import ImpactSection from './components/ImpactSection';
+import Join from './components/Join';
+
 
 const App = () => {
   return (
@@ -26,6 +28,7 @@ const App = () => {
             <ImpactSection/>
             <Ayu />
             <CampaignsSection />
+            <Join/>
             <Gallery />
           </>
         } />

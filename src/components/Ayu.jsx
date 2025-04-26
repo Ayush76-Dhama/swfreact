@@ -56,7 +56,7 @@ const FlipBoxContainer = styled(motion.div)`
 
 const FlipBox = styled(motion.div)`
   width: 100%;
-  height: 400px;
+  height: 500px;
   perspective: 1000px;
 `;
 
@@ -108,7 +108,7 @@ const FlipBoxBack = styled(motion.div)`
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  padding: 2.5rem;
   border: 1px solid rgba(255, 255, 255, 0.2);
 `;
 
@@ -138,8 +138,8 @@ const FlipBoxTitle = styled(motion.div)`
 
 const FlipBoxText = styled(motion.p)`
   color: #333;
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.1rem;
+  line-height: 1.8;
   margin: 0;
 `;
 
