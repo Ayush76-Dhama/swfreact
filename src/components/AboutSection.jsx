@@ -1,6 +1,93 @@
 import React, { useState, useEffect } from 'react';
 import { Tab, Nav } from 'react-bootstrap';
 import { motion } from 'framer-motion';
+import styled from 'styled-components';
+
+const StyledSection = styled(motion.section)`
+  background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+  position: relative;
+  overflow: hidden;
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%239C92AC' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    opacity: 0.5;
+    z-index: 0;
+  }
+`;
+
+const ImageContainer = styled(motion.div)`
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+  height: 350px;
+  
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 50%;
+    background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+    z-index: 1;
+  }
+  
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+  
+  &:hover img {
+    transform: scale(1.05);
+  }
+`;
+
+const ContentContainer = styled.div`
+  position: relative;
+  z-index: 1;
+`;
+
+const TabContainer = styled.div`
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  border: 1px solid rgba(255,255,255,0.2);
+`;
+
+const StyledNav = styled(Nav)`
+  .nav-link {
+    border-radius: 50px;
+    padding: 0.8rem 2rem;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    
+    &.active {
+      background: linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%);
+      color: white;
+      box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+    }
+    
+    &:not(.active) {
+      background: #f8f9fa;
+      color: #495057;
+      
+      &:hover {
+        background: #e9ecef;
+      }
+    }
+  }
+`;
 
 const AboutSection = () => {
   const [activeKey, setActiveKey] = useState('tab-1');
@@ -28,50 +115,23 @@ const AboutSection = () => {
     }
   };
 
-  // Create motion components to ensure the import is used
-  const MotionDiv = motion.div;
-  const MotionSection = motion.section;
-
   return (
-    <MotionSection 
-      className="container-fluid about py-5 position-relative overflow-hidden" 
+    <StyledSection 
+      className="container-fluid py-5" 
       aria-label="About SheWings"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
-      {/* Modern background with gradient and pattern */}
-      <div className="position-absolute top-0 start-0 w-100 h-100" 
-        style={{ 
-          background: 'linear-gradient(135deg, rgba(255,255,255,0.9) 0%, rgba(240,240,255,0.9) 100%)',
-          zIndex: -2 
-        }}
-      ></div>
-      <div className="position-absolute top-0 start-0 w-100 h-100" 
-        style={{ 
-          backgroundImage: 'radial-gradient(circle at 25px 25px, rgba(0,0,0,0.05) 2%, transparent 0%), radial-gradient(circle at 75px 75px, rgba(0,0,0,0.05) 2%, transparent 0%)',
-          backgroundSize: '100px 100px',
-          zIndex: -1 
-        }}
-      ></div>
-      
       <div className="container py-5">
-        <MotionDiv 
+        <motion.div 
           className="row g-5"
           initial="hidden"
           animate={isVisible ? "visible" : "hidden"}
           variants={staggerChildren}
         >
-          <MotionDiv className="col-xl-5" variants={fadeInUp}>
-            <div className="h-100 position-relative rounded-4 overflow-hidden shadow-lg" 
-              style={{ 
-                boxShadow: '0 20px 40px rgba(0,0,0,0.1)',
-                transform: 'perspective(1000px) rotateY(-5deg)',
-                transition: 'transform 0.3s ease'
-              }}
-              onMouseEnter={(e) => e.currentTarget.style.transform = 'perspective(1000px) rotateY(0deg)'}
-              onMouseLeave={(e) => e.currentTarget.style.transform = 'perspective(1000px) rotateY(-5deg)'}
-            >
+          <motion.div className="col-xl-5" variants={fadeInUp}>
+            <ImageContainer>
               {!imageLoaded && (
                 <div className="position-absolute top-0 start-0 w-100 h-100 bg-light d-flex align-items-center justify-content-center">
                   <div className="spinner-border text-primary" role="status">
@@ -81,32 +141,20 @@ const AboutSection = () => {
               )}
               <img
                 src="/images/img/about-3.jpg"
-                className={`img-fluid h-100 w-100 object-fit-cover ${!imageLoaded ? 'invisible' : ''}`}
-                style={{
-                  width: '500px',
-                  height: '400px',
-                  maxWidth: '100%'
-                }}
-                width="500"
-                height="400"
+                className={!imageLoaded ? 'invisible' : ''}
                 alt="About SheWings Foundation team and mission"
                 onLoad={handleImageLoad}
                 loading="lazy"
               />
-              <div className="position-absolute bottom-0 start-0 w-100 p-4" 
-                style={{ 
-                  background: 'linear-gradient(to top, rgba(0,0,0,0.8) 0%, rgba(0,0,0,0) 100%)',
-                  color: 'white'
-                }}
-              >
-                <p className="mb-0 fst-italic fs-5">Empowering women, transforming communities</p>
+              <div className="position-absolute bottom-0 start-0 w-100 p-4" style={{ zIndex: 2 }}>
+                <p className="mb-0 fst-italic fs-5 text-white">Empowering women, transforming communities</p>
               </div>
-            </div>
-          </MotionDiv>
-          <MotionDiv className="col-xl-7" variants={fadeInUp}>
-            <div className="ps-xl-5">
+            </ImageContainer>
+          </motion.div>
+          <motion.div className="col-xl-7" variants={fadeInUp}>
+            <ContentContainer className="ps-xl-5">
               <div className="d-flex align-items-center mb-3">
-                <div className="me-3" style={{ width: '40px', height: '3px', backgroundColor: '#6c5ce7' }}></div>
+                <div className="me-3" style={{ width: '40px', height: '3px', background: 'linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%)' }}></div>
                 <h5 className="text-uppercase fw-bold mb-0" style={{ color: '#000000', letterSpacing: '2px' }}>About Us</h5>
               </div>
               <h1 className="mb-4 display-4 fw-bold" style={{ 
@@ -117,48 +165,19 @@ const AboutSection = () => {
                 About SheWings Foundation
               </h1>
               <p className="fs-5 mb-4 text-muted">
-                At SheWings Foundation, our mission is simple yet powerful, to create healthier, happier, and empowered communities by addressing issues that impact women and their families. We believe in the strength of community, the power of knowledge, and the potential of every individual to bring about positive change. Through education, support, and sustainable initiatives, we're transforming lives and building a world where everyone can thrive.
+                At SheWings Foundation, our mission is simple yet powerful, to create healthier, happier, and empowered communities by addressing issues that impact women and their families. We believe in the strength of community, the power of knowledge, and the potential of every individual to bring about positive change.
               </p>
 
-              <div className="tab-class p-4 rounded-4" 
-                style={{ 
-                  background: 'rgba(255, 255, 255, 0.8)',
-                  backdropFilter: 'blur(10px)',
-                  boxShadow: '0 8px 32px rgba(0, 0, 0, 0.1)',
-                  border: '1px solid rgba(255, 255, 255, 0.2)'
-                }}
-              >
+              <TabContainer>
                 <Tab.Container activeKey={activeKey} onSelect={(k) => setActiveKey(k)}>
-                  <Nav variant="pills" className="d-flex justify-content-center gap-3 mb-4">
+                  <StyledNav variant="pills" className="d-flex justify-content-center gap-3 mb-4">
                     <Nav.Item>
-                      <Nav.Link 
-                        eventKey="tab-1" 
-                        className={`d-flex py-2 text-center rounded-pill ${activeKey === 'tab-1' ? 'bg-primary text-white' : 'bg-light text-dark'}`}
-                        role="tab"
-                        aria-selected={activeKey === 'tab-1'}
-                        style={{ 
-                          transition: 'all 0.3s ease',
-                          boxShadow: activeKey === 'tab-1' ? '0 4px 15px rgba(108, 92, 231, 0.3)' : 'none'
-                        }}
-                      >
-                        <span className="px-4">About</span>
-                      </Nav.Link>
+                      <Nav.Link eventKey="tab-1">About</Nav.Link>
                     </Nav.Item>
                     <Nav.Item>
-                      <Nav.Link 
-                        eventKey="tab-4" 
-                        className={`d-flex py-2 text-center rounded-pill ${activeKey === 'tab-4' ? 'bg-primary text-white' : 'bg-light text-dark'}`}
-                        role="tab"
-                        aria-selected={activeKey === 'tab-4'}
-                        style={{ 
-                          transition: 'all 0.3s ease',
-                          boxShadow: activeKey === 'tab-4' ? '0 4px 15px rgba(108, 92, 231, 0.3)' : 'none'
-                        }}
-                      >
-                        <span className="px-4">Story</span>
-                      </Nav.Link>
+                      <Nav.Link eventKey="tab-4">Story</Nav.Link>
                     </Nav.Item>
-                  </Nav>
+                  </StyledNav>
 
                   <Tab.Content>
                     <Tab.Pane eventKey="tab-1">
@@ -167,7 +186,7 @@ const AboutSection = () => {
                         <p className="mb-4 text-muted">
                           At SheWings Foundation, we believe that access to health education and essential resources should be a universal right. Our foundation was created to address the deep-rooted lack of healthcare awareness, especially in areas where conversations around menstrual health, reproductive health, and maternal wellness are often limited or stigmatized.
                         </p>
-                        <a 
+                        <motion.a 
                           className="btn py-2 px-4 rounded-pill" 
                           href="/about-us"
                           target="_blank"
@@ -176,146 +195,50 @@ const AboutSection = () => {
                             background: 'linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%)',
                             color: 'white',
                             boxShadow: '0 4px 15px rgba(108, 92, 231, 0.3)',
-                            transition: 'all 0.3s ease',
                             border: 'none'
                           }}
-                          onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-3px)'}
-                          onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
+                          whileHover={{ y: -3 }}
+                          whileTap={{ scale: 0.98 }}
                         >
                           Read More
-                        </a>
+                        </motion.a>
                       </div>
                     </Tab.Pane>
                     <Tab.Pane eventKey="tab-4">
                       <div className="text-start my-auto">
                         <h5 className="text-uppercase mb-3 mt-3 fw-bold">Our Campaigns</h5>
                         <ul className="list-unstyled">
-                          <li className="mb-3">
-                            <a
-                              href="https://zeenews.india.com/..."
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-decoration-none text-dark d-flex align-items-center"
-                              style={{ 
-                                transition: 'all 0.3s ease',
-                                padding: '8px 12px',
-                                borderRadius: '8px',
-                                backgroundColor: 'rgba(255, 255, 255, 0.5)'
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = 'rgba(108, 92, 231, 0.1)';
-                                e.currentTarget.style.transform = 'translateX(5px)';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
-                                e.currentTarget.style.transform = 'translateX(0)';
-                              }}
+                          {[
+                            { title: 'Woman Health Awareness Programme', link: 'https://zeenews.india.com/...' },
+                            { title: '#DonateOldBraPanty', link: 'https://newsroompost.com/...' },
+                            { title: '#RedDotCampaign', link: 'https://newsroompost.com/...' },
+                            { title: '#YesIBleed', link: 'https://newsroompost.com/...' },
+                            { title: '#FeedTheFuture', link: 'https://newsroompost.com/...' }
+                          ].map((item, index) => (
+                            <motion.li 
+                              key={index} 
+                              className="mb-3"
+                              whileHover={{ x: 5 }}
                             >
-                              <span className="me-2" style={{ color: '#6c5ce7' }}>→</span>
-                              <span>Woman Health Awareness Programme</span>
-                            </a>
-                          </li>
-                          <li className="mb-3">
-                            <a 
-                              href="https://newsroompost.com/lifestyle/donateoldbrapanty-is-trending-as-wo…s-are-donating-old-dry-cleaned-ugs-here-is-how-you-can-donate/586298.html"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-decoration-none text-dark d-flex align-items-center"
-                              style={{ 
-                                transition: 'all 0.3s ease',
-                                padding: '8px 12px',
-                                borderRadius: '8px',
-                                backgroundColor: 'rgba(255, 255, 255, 0.5)'
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = 'rgba(108, 92, 231, 0.1)';
-                                e.currentTarget.style.transform = 'translateX(5px)';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
-                                e.currentTarget.style.transform = 'translateX(0)';
-                              }}
-                            >
-                              <span className="me-2" style={{ color: '#6c5ce7' }}>→</span>
-                              <span>#DonateOldBraPanty</span>
-                            </a>
-                          </li>
-                          <li className="mb-3">
-                            <a 
-                              href="https://newsroompost.com/lifestyle/donateoldbrapanty-is-trending-as-wo…s-are-donating-old-dry-cleaned-ugs-here-is-how-you-can-donate/586298.html"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-decoration-none text-dark d-flex align-items-center"
-                              style={{ 
-                                transition: 'all 0.3s ease',
-                                padding: '8px 12px',
-                                borderRadius: '8px',
-                                backgroundColor: 'rgba(255, 255, 255, 0.5)'
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = 'rgba(108, 92, 231, 0.1)';
-                                e.currentTarget.style.transform = 'translateX(5px)';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
-                                e.currentTarget.style.transform = 'translateX(0)';
-                              }}
-                            >
-                              <span className="me-2" style={{ color: '#6c5ce7' }}>→</span>
-                              <span>#RedDotCampaign</span>
-                            </a>
-                          </li>
-                          <li className="mb-3">
-                            <a 
-                              href="https://newsroompost.com/lifestyle/donateoldbrapanty-is-trending-as-wo…s-are-donating-old-dry-cleaned-ugs-here-is-how-you-can-donate/586298.html"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-decoration-none text-dark d-flex align-items-center"
-                              style={{ 
-                                transition: 'all 0.3s ease',
-                                padding: '8px 12px',
-                                borderRadius: '8px',
-                                backgroundColor: 'rgba(255, 255, 255, 0.5)'
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = 'rgba(108, 92, 231, 0.1)';
-                                e.currentTarget.style.transform = 'translateX(5px)';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
-                                e.currentTarget.style.transform = 'translateX(0)';
-                              }}
-                            >
-                              <span className="me-2" style={{ color: '#6c5ce7' }}>→</span>
-                              <span>#YesIBleed</span>
-                            </a>
-                          </li>
-                          <li className="mb-3">
-                            <a 
-                              href="https://newsroompost.com/lifestyle/donateoldbrapanty-is-trending-as-wo…s-are-donating-old-dry-cleaned-ugs-here-is-how-you-can-donate/586298.html"
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="text-decoration-none text-dark d-flex align-items-center"
-                              style={{ 
-                                transition: 'all 0.3s ease',
-                                padding: '8px 12px',
-                                borderRadius: '8px',
-                                backgroundColor: 'rgba(255, 255, 255, 0.5)'
-                              }}
-                              onMouseEnter={(e) => {
-                                e.currentTarget.style.backgroundColor = 'rgba(108, 92, 231, 0.1)';
-                                e.currentTarget.style.transform = 'translateX(5px)';
-                              }}
-                              onMouseLeave={(e) => {
-                                e.currentTarget.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
-                                e.currentTarget.style.transform = 'translateX(0)';
-                              }}
-                            >
-                              <span className="me-2" style={{ color: '#6c5ce7' }}>→</span>
-                              <span>#FeedTheFuture</span>
-                            </a>
-                          </li>
-                          <li className="mt-4">
+                              <a
+                                href={item.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-decoration-none text-dark d-flex align-items-center p-2 rounded"
+                                style={{ 
+                                  transition: 'all 0.3s ease',
+                                  backgroundColor: 'rgba(255, 255, 255, 0.5)'
+                                }}
+                              >
+                                <span className="me-2" style={{ color: '#6c5ce7' }}>→</span>
+                                <span>{item.title}</span>
+                              </a>
+                            </motion.li>
+                          ))}
+                          <motion.li 
+                            className="mt-4"
+                            whileHover={{ y: -3 }}
+                          >
                             <a
                               href="https://www.youtube.com/watch?v=jnxrBBCg8Kg"
                               target="_blank"
@@ -325,27 +248,24 @@ const AboutSection = () => {
                                 background: 'linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%)',
                                 color: 'white',
                                 boxShadow: '0 4px 15px rgba(108, 92, 231, 0.3)',
-                                transition: 'all 0.3s ease',
                                 border: 'none'
                               }}
-                              onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-3px)'}
-                              onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
                             >
                               <span className="me-2">▶</span>
                               <span>Watch Video</span>
                             </a>
-                          </li>
+                          </motion.li>
                         </ul>
                       </div>
                     </Tab.Pane>
                   </Tab.Content>
                 </Tab.Container>
-              </div>
-            </div>
-          </MotionDiv>
-        </MotionDiv>
+              </TabContainer>
+            </ContentContainer>
+          </motion.div>
+        </motion.div>
       </div>
-    </MotionSection>
+    </StyledSection>
   );
 };
 
