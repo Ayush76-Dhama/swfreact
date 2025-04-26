@@ -1,5 +1,5 @@
-import React from 'react';
-import { Container, Row, Col, Card } from 'react-bootstrap';
+import React, { useState, useEffect, useCallback } from 'react';
+import { Container } from 'react-bootstrap';
 import styled from 'styled-components';
 
 const GalleryTitle = styled.h2`
@@ -8,47 +8,172 @@ const GalleryTitle = styled.h2`
   color: #333;
 `;
 
-const GalleryCard = styled(Card)`
-  margin-bottom: 1.5rem;
-  transition: transform 0.3s ease;
+const SliderContainer = styled.div`
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  margin-bottom: 2rem;
   
   &:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    .slider-controls {
+      opacity: 1;
+    }
+  }
+`;
+
+const SliderTrack = styled.div`
+  display: flex;
+  transition: transform 0.5s ease;
+  gap: 1.5rem;
+  padding: 1rem 0;
+`;
+
+const SliderItem = styled.div`
+  min-width: 400px;
+  height: 300px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+  
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
   }
   
   img {
-    height: 250px;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
   }
 `;
 
+const SliderControls = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  display: flex;
+  justify-content: space-between;
+  padding: 0 20px;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  
+  &.slider-controls {
+    opacity: 0;
+    &:hover {
+      opacity: 1;
+    }
+  }
+`;
+
+const SliderButton = styled.button`
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 2;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+  
+  &:hover {
+    background: white;
+    transform: scale(1.1);
+  }
+`;
+
+const SliderDots = styled.div`
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 1.5rem;
+`;
+
+const SliderDot = styled.div`
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: ${props => props.active ? '#333' : '#ccc'};
+  cursor: pointer;
+  transition: all 0.3s ease;
+  
+  &:hover {
+    background: #333;
+  }
+`;
+
 function Gallery() {
-  // Sample gallery data - replace with your actual images
+  const [currentIndex, setCurrentIndex] = useState(0);
+  const [isPaused, setIsPaused] = useState(false);
+  
   const galleryItems = [
-    { id: 1, image: '/images/gallery1.jpg', title: 'Women Empowerment' },
-    { id: 2, image: '/images/gallery2.jpg', title: 'Education Initiative' },
-    { id: 3, image: '/images/gallery3.jpg', title: 'Community Outreach' },
-    { id: 4, image: '/images/gallery4.jpg', title: 'Skill Development' },
-    { id: 5, image: '/images/gallery5.jpg', title: 'Health Awareness' },
-    { id: 6, image: '/images/gallery6.jpg', title: 'Environmental Project' },
+    { id: 1, image: '/images/img/Events/IMG_9329.jpg', title: 'Special Event' },
+    { id: 2, image: '/images/img/gallery-6.jpg', title: 'Gallery Showcase' },
+    { id: 3, image: '/images/img/gallery-7.jpg', title: 'Featured Work' },
+    { id: 4, image: '/images/img/gallery-10.jpg', title: 'Creative Display' },
+    { id: 5, image: '/images/img/Events/IMG_9369.jpg', title: 'Event Highlights' },
+    { id: 6, image: '/images/img/Events/IMG_9403.jpg', title: 'Special Moments' },
   ];
+
+  const itemsPerView = 3;
+  const maxIndex = galleryItems.length - itemsPerView;
+
+  const nextSlide = useCallback(() => {
+    setCurrentIndex(prev => (prev + 1) % (maxIndex + 1));
+  }, [maxIndex]);
+
+  const prevSlide = () => {
+    setCurrentIndex(prev => (prev - 1 + (maxIndex + 1)) % (maxIndex + 1));
+  };
+
+  const goToSlide = (index) => {
+    setCurrentIndex(index);
+  };
+
+  useEffect(() => {
+    let interval;
+    if (!isPaused) {
+      interval = setInterval(nextSlide, 3000); // Change slide every 3 seconds
+    }
+    return () => clearInterval(interval);
+  }, [isPaused, nextSlide]);
 
   return (
     <Container className="py-5">
       <GalleryTitle>Our Gallery</GalleryTitle>
-      <Row>
-        {galleryItems.map((item) => (
-          <Col key={item.id} xs={12} sm={6} md={4}>
-            <GalleryCard>
-              <Card.Img variant="top" src={item.image} alt={item.title} />
-              <Card.Body>
-                <Card.Title>{item.title}</Card.Title>
-              </Card.Body>
-            </GalleryCard>
-          </Col>
-        ))}
-      </Row>
+      <SliderContainer 
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
+        <SliderTrack style={{ transform: `translateX(-${currentIndex * (100 / itemsPerView)}%)` }}>
+          {galleryItems.map((item) => (
+            <SliderItem key={item.id}>
+              <img src={item.image} alt={item.title} />
+            </SliderItem>
+          ))}
+        </SliderTrack>
+        <SliderControls className="slider-controls">
+          <SliderButton onClick={prevSlide}>←</SliderButton>
+          <SliderButton onClick={nextSlide}>→</SliderButton>
+        </SliderControls>
+        <SliderDots>
+          {[...Array(maxIndex + 1)].map((_, index) => (
+            <SliderDot
+              key={index}
+              active={index === currentIndex}
+              onClick={() => goToSlide(index)}
+            />
+          ))}
+        </SliderDots>
+      </SliderContainer>
     </Container>
   );
 }

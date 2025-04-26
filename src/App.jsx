@@ -9,17 +9,21 @@ import Footer from './components/Footer';
 import CampaignsSection from './components/CampaignsSection';
 import Ayu from './components/Ayu';
 import ContactSection from './components/ContactSection';
+import ImpactSection from './components/ImpactSection';
 
 const App = () => {
   return (
     <Router>
-      <TopBar />
-      <Navbar />
+      { <TopBar />}
+      { <Navbar /> }
       <Routes>
         <Route path="/" element={
           <>
+          {/* <TopBar />
+           <Navbar /> */}
             <HeaderSection />
             <AboutSection />
+            <ImpactSection/>
             <Ayu />
             <CampaignsSection />
             <Gallery />

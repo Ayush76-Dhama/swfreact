@@ -3,6 +3,8 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { Navbar as BootstrapNavbar, Container, Nav, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 
+
+
 const StyledNavbar = styled(BootstrapNavbar)`
   background-color: white;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
@@ -121,7 +123,9 @@ function Navbar() {
       expanded={expanded}
       className={scrolled ? 'scrolled' : ''}
     >
+      
       <Container>
+      
         <BootstrapNavbar.Brand as={NavLink} to="/">
           <Logo 
             src="/images/img/logo/logo2.jpg" 
