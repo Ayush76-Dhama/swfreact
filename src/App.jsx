@@ -28,7 +28,7 @@ const App = () => {
             <ImpactSection/>
             <Ayu />
             <CampaignsSection />
-            <Join/>
+            <Join />
             <Gallery />
           </>
         } />

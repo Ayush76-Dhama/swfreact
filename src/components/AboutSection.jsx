@@ -2,8 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Tab, Nav } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import Join from './Join';
-import { Link, useLocation } from "react-router-dom";
+import FBuilt from './FBuilt';
+
+
 
 const StyledSection = styled(motion.section)`
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -176,13 +177,10 @@ const AboutSection = () => {
             </ImageContainer>
             
             {/* Paragraph after images */}
-            {isDirectRoute && (
-              <div>
-                <Join />
-              </div>
-            
-            )}
     
+
+              <FBuilt />
+
             {/* Additional content after images */}
             <motion.div 
               className="mt-4 p-4 rounded-3"
