@@ -2,9 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { Tab, Nav } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-import FBuilt from './FBuilt';
-
-
 
 const StyledSection = styled(motion.section)`
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -97,9 +94,14 @@ const AboutSection = () => {
   const [activeKey, setActiveKey] = useState('tab-1');
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const [isDirectRoute, setIsDirectRoute] = useState(false);
 
   useEffect(() => {
     setIsVisible(true);
+    const currentPath = window.location.pathname;
+    setIsDirectRoute(currentPath === '/about');
+    console.log('Current Path:', currentPath);
+    console.log('isDirectRoute:', currentPath === '/about');
   }, []);
 
   const handleImageLoad = () => {
@@ -119,7 +121,20 @@ const AboutSection = () => {
     }
   };
 
+  const Action = () => {
+    const sections = [
+      {
+        text: "SheWings Foundation drives action and advocacy for lasting health change. We collaborate with experts and leaders to improve healthcare access, from menstrual hygiene in schools to workplace mental health programs. Rooted in research and community input, our initiatives address specific challenges, ensuring impactful, tailored solutions for diverse needs."
+      },
+      {
+        text: "SheWings Foundation drives action and advocacy for lasting health change. We collaborate with experts and leaders to improve healthcare access, from menstrual hygiene in schools to workplace mental health programs. Rooted in research and community input, our initiatives address specific challenges, ensuring impactful, tailored solutions for diverse needs."
+      },
+    ]
+  }
+
+
   return (
+
     <StyledSection 
       className="container-fluid py-5" 
       aria-label="About SheWings"
@@ -155,7 +170,6 @@ const AboutSection = () => {
               </div>
             </ImageContainer>
             
-            
             <ImageContainer>
               {!imageLoaded && (
                 <div className="position-absolute top-0 start-0 w-100 h-100 bg-light d-flex align-items-center justify-content-center">
@@ -171,70 +185,12 @@ const AboutSection = () => {
                 onLoad={handleImageLoad}
                 loading="lazy"
               />
-              <div className="position-absolute bottom-0 start-0 w-100 p-4" style={{ zIndex: 2 }}>
+              <div className="position-absolute bottom-0 start-0 w-100 p-4" >
                 <p className="mb-0 fst-italic fs-5 text-white">Empowering women, transforming communities</p>
               </div>
             </ImageContainer>
             
-            {/* Paragraph after images */}
-    
-
-              <FBuilt />
-
-            {/* Additional content after images */}
-            <motion.div 
-              className="mt-4 p-4 rounded-3"
-              style={{ 
-                background: 'rgba(255, 255, 255, 0.9)',
-                boxShadow: '0 10px 30px rgba(0,0,0,0.05)',
-                border: '1px solid rgba(255,255,255,0.2)'
-              }}
-              variants={fadeInUp}
-            >
-              <h5 className="fw-bold mb-3" style={{ color: '#6c5ce7' }}>Our Impact</h5>
-              <div className="d-flex justify-content-between mb-3">
-                <div className="text-center">
-                  <h3 className="fw-bold" style={{ 
-                    background: 'linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                  }}>10K+</h3>
-                  <p className="text-muted mb-0">Women Empowered</p>
-                </div>
-                <div className="text-center">
-                  <h3 className="fw-bold" style={{ 
-                    background: 'linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                  }}>50+</h3>
-                  <p className="text-muted mb-0">Communities</p>
-                </div>
-                <div className="text-center">
-                  <h3 className="fw-bold" style={{ 
-                    background: 'linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%)',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent'
-                  }}>100+</h3>
-                  <p className="text-muted mb-0">Events</p>
-                </div>
-              </div>
-              <div className="text-center mt-3">
-                <motion.a 
-                  className="btn py-2 px-4 rounded-pill" 
-                  href="/impact"
-                  style={{ 
-                    background: 'linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%)',
-                    color: 'white',
-                    boxShadow: '0 4px 15px rgba(108, 92, 231, 0.3)',
-                    border: 'none'
-                  }}
-                  whileHover={{ y: -3 }}
-                  whileTap={{ scale: 0.98 }}
-                >
-                  View Our Impact
-                </motion.a>
-              </div>
-            </motion.div>
+                       
           </motion.div>
           <motion.div className="col-xl-7" variants={fadeInUp}>
             <ContentContainer className="ps-xl-5">
@@ -350,7 +306,106 @@ const AboutSection = () => {
           </motion.div>
         </motion.div>
       </div>
+      {isDirectRoute && (
+        
+     <div
+     className="container-fluid py-5"
+     style={{
+       background: 'linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))',
+       objectFit: 'cover'
+     }}
+   >
+     <div className="container py-5 text-center">
+       <div className="row justify-content-center">
+         <div>
+           <h1 className="mb-4 text-dark">A Foundation Built on Action and Advocacy</h1>
+           <p className="mb-4 text-dark">
+             SheWings Foundation isn’t just about providing information; it’s about
+             driving action and advocacy to create real, lasting change. Our work extends
+             beyond simple awareness to advocate for healthcare policies and access that
+             support individuals across all communities. We collaborate with public health
+             experts, local leaders, and policy influencers to bring attention to health
+             issues that are often underrepresented. From advocating for better menstrual
+             hygiene resources in schools to encouraging workplaces to implement mental
+             health programs, we are committed to building a system that supports holistic
+             health for all.
+           </p>
+         </div>
+
+         <div>
+           <p className="mb-4 text-dark">
+             One of our core strengths at SheWings Foundation is our focus on
+             understanding the unique challenges faced by the communities we serve. Every
+             program we design is rooted in careful research and community feedback. By
+             spending time with the individuals and groups we aim to support, we gain
+             insight into the specific barriers they face, allowing us to tailor our
+             initiatives effectively. Whether it’s a rural village with limited healthcare
+             access or a corporate environment where health awareness could make a
+             difference in productivity, our approach is always focused on meeting people
+             where they are and addressing their specific needs.
+           </p>
+         </div>
+
+         <div>
+           <p className="mb-4 text-dark">
+             Education is at the heart of everything we do at SheWings Foundation. We know
+             that knowledge empowers people to take control of their lives and make better
+             health decisions. This is why our programs emphasize more than just
+             information; we foster critical thinking, self-care practices, and
+             community-building through education. Our health sessions are designed to be
+             interactive and accessible, ensuring that everyone—from school students to
+             working professionals—gains valuable insights they can apply in their daily
+             lives.
+           </p>
+           <p className="mb-4 text-dark">
+             We offer resources that help individuals understand how their health impacts
+             their overall quality of life, how to identify health risks, and where to find
+             the help they need. By focusing on education, SheWings Foundation empowers
+             each participant to become an advocate for their own well-being, as well as
+             for the well-being of their family, friends, and community.
+           </p>
+         </div>
+
+         <div>
+           <p className="mb-4 text-dark">
+             We believe that meaningful health changes don’t happen in isolation. SheWings
+             Foundation builds supportive networks within each community we serve,
+             bringing together health professionals, educators, volunteers, and advocates
+             who share our commitment to positive change. These networks create a sense of
+             solidarity, allowing people to find guidance and support from others who are
+             on the same journey toward better health.
+           </p>
+           <p className="mb-4 text-dark">
+             For instance, our maternal health programs connect new and expectant mothers
+             with trained lactation consultants, counselors, and peer support groups,
+             ensuring they have a reliable support system throughout this significant phase
+             of their lives. Similarly, our cancer awareness campaigns offer a safe space
+             for individuals to share their experiences, learn from each other, and receive
+             practical support and guidance.
+           </p>
+         </div>
+
+         <div>
+           <p className="mb-4 text-dark">
+             SheWings Foundation invites you to join us on this journey. From volunteering
+             and participating in our programs to donating or partnering with us, there are
+             many ways to be involved. Together, we can bring health education to every
+             corner of society, helping to build a future where healthcare knowledge is a
+             shared asset, and well-being is within everyone’s reach.
+           </p>
+           <p className="mb-4 text-dark">
+             Explore SheWings Foundation’s programs, learn about our impact, and be part of
+             a movement dedicated to creating a healthier, informed world. Together, let’s
+             build a future where knowledge and compassion transform lives, one community
+             at a time.
+           </p>
+         </div>
+       </div>
+     </div>
+   </div>
+      )}
     </StyledSection>
+    
   );
 };
 
