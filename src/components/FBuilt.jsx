@@ -1,30 +1,30 @@
 import React from 'react';
-
+import About from 'About'
 const FBuilt = () => {
   return (
     <div
       className="container-fluid py-5"
-      style={{
-        background: 'linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))',
-        objectFit: 'cover'
-      }}
+      // style={{
+      //   background: 'linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2))',
+      //   objectFit: 'cover'
+      // }}
     >
       <div className="container py-5 text-center">
         <div className="row justify-content-center">
-          <div>
-            <h1 className="mb-4 text-dark">A Foundation Built on Action and Advocacy</h1>
-            <p className="mb-4 text-dark">
-              SheWings Foundation isn’t just about providing information; it’s about
-              driving action and advocacy to create real, lasting change. Our work extends
-              beyond simple awareness to advocate for healthcare policies and access that
-              support individuals across all communities. We collaborate with public health
-              experts, local leaders, and policy influencers to bring attention to health
-              issues that are often underrepresented. From advocating for better menstrual
-              hygiene resources in schools to encouraging workplaces to implement mental
-              health programs, we are committed to building a system that supports holistic
-              health for all.
-            </p>
-          </div>
+        <div class="container my-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card border-danger shadow-sm p-3 mb-4 bg-light rounded" style="border-width: 2px;">
+        <div class="card-body">
+          <p class="card-text">
+            SheWings Foundation drives action and advocacy for lasting health change. We collaborate with experts and leaders to improve healthcare access, from menstrual hygiene in schools to workplace mental health programs. Rooted in research and community input, our initiatives address specific challenges, ensuring impactful, tailored solutions for diverse needs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
 
           <div>
             <p className="mb-4 text-dark">

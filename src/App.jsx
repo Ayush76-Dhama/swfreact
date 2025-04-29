@@ -11,6 +11,7 @@ import Ayu from './components/Ayu';
 import ContactSection from './components/ContactSection';
 import ImpactSection from './components/ImpactSection';
 import Join from './components/Join';
+import Impact from './components/Impact';
 
 
 const App = () => {
@@ -33,6 +34,7 @@ const App = () => {
           </>
         } />
         <Route path="/about" element={<AboutSection />} />
+        <Route path="/impact" element={<Impact />} />
         <Route path="/impactsection" element={<ImpactSection />} />
         <Route path="/campaigns" element={<CampaignsSection />} />
         <Route path="/gallery" element={<Gallery />} />
