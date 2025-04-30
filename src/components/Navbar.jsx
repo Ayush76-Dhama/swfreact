@@ -155,11 +155,17 @@ function Navbar() {
               <StyledNavLink to="/vision-mission">Vision & Mission</StyledNavLink>
             </Nav.Item>
             <Nav.Item>
-              <StyledNavLink to="/campaigns">Campaigns</StyledNavLink>
+              <StyledNavLink to="/tender">Tender</StyledNavLink>
             </Nav.Item>
             <Nav.Item>
-              <StyledNavLink to="/gallery">Gallery</StyledNavLink>
+              <StyledNavLink to="/our-supporters">Our Supporters</StyledNavLink>
             </Nav.Item>
+            {/* <Nav.Item>
+              <StyledNavLink to="/campaigns">Campaigns</StyledNavLink>
+            </Nav.Item> */}
+            {/* <Nav.Item>
+              <StyledNavLink to="/gallery">Gallery</StyledNavLink>
+            </Nav.Item> */}
             <Nav.Item>
               <StyledNavLink to="/contact">Contact Us</StyledNavLink>
             </Nav.Item>

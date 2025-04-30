@@ -140,9 +140,9 @@ const Navigation = () => {
               <Nav.Link href="/" active>Home</Nav.Link>
               <Nav.Link href="/about">About</Nav.Link>
               <Nav.Link href="/impact">Impact</Nav.Link>
-              <Nav.Link href="/mission">Vision & Mission</Nav.Link>
-              <Nav.Link href="/tenders">Tenders</Nav.Link>
-              <Nav.Link href="/supporters">Our Supporters</Nav.Link>
+              <Nav.Link href="/vision-mission">Vision & Mission</Nav.Link>
+              <Nav.Link href="/tender">Tenders</Nav.Link>
+              <Nav.Link href="/our-supporters">Our Supporters</Nav.Link>
               <Nav.Link href="/contact">Contact</Nav.Link>
             </Nav>
             <DonateButton href="/donate">Donate Now</DonateButton>
