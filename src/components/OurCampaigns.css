@@ -1,0 +1,71 @@
+.card-effect {
+  transition: transform 0.3s ease-in-out;
+}
+
+.card-effect:hover {
+  transform: translateY(-10px);
+}
+
+/* Ensure the cards have equal height */
+.card-effect > div {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Make the description take up remaining space */
+.card-effect p {
+  flex-grow: 1;
+  margin-bottom: 0;
+}
+
+.gradient-text {
+  /* background: linear-gradient(90deg, #FF0000 0%, #666666 100%); */
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: #ec1f27;
+  font-weight: bold;
+  font-size: 2.5rem;
+}
+
+.about-button {
+  background-color: #3c4142;
+  color: #fefdee;
+  padding: 10px 25px;
+  border: none;
+  border-radius: 5px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  display: inline-block;
+  margin-top: 20px;
+  text-decoration: none;
+}
+
+.about-button:hover {
+  background-color: #3c4142;
+  transform: translateY(-2px);
+  color: white;
+}
+
+.nav-link {
+  border-radius: 50px;
+  padding: 0.8rem 2rem;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.nav-link.active {
+  background: #3c4142;
+  color: white;
+  box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
+}
+
+.nav-link:not(.active) {
+  background: #f8f9fa;
+  color: #495057;
+}
+
+.nav-link:not(.active):hover {
+  background: #e9ecef;
+  transform: translateY(-2px);
+} 

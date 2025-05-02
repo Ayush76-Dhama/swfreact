@@ -26,7 +26,7 @@ const StyledSection = styled(motion.section)`
 `;
 
 const GradientText = styled.span`
-  background: linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%);
+  background: #ec1f27;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   position: relative;

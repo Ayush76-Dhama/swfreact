@@ -143,6 +143,7 @@ const Navigation = () => {
               <Nav.Link href="/vision-mission">Vision & Mission</Nav.Link>
               <Nav.Link href="/tender">Tenders</Nav.Link>
               <Nav.Link href="/our-supporters">Our Supporters</Nav.Link>
+              <Nav.Link href="/our-campaigns">Our Campaigns</Nav.Link>
               <Nav.Link href="/contact">Contact</Nav.Link>
             </Nav>
             <DonateButton href="/donate">Donate Now</DonateButton>

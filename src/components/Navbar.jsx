@@ -24,14 +24,14 @@ const StyledNavbar = styled(BootstrapNavbar)`
 `;
 
 const StyledNavLink = styled(NavLink)`
-  color: #333;
+  color: #ec1f27;
   font-weight: 500;
   padding: 0.5rem 1rem;
   transition: color 0.3s ease;
   position: relative;
   
   &:hover {
-    color: #FF4B6E;
+    color: #ec1f27;
   }
   
   &.active {
@@ -52,7 +52,7 @@ const StyledNavLink = styled(NavLink)`
 `;
 
 const DonateButton = styled(Button)`
-  background-color: #FF4B6E;
+  background-color: #3c4142;
   border-color: #FF4B6E;
   color: white;
   font-weight: 600;
@@ -159,6 +159,9 @@ function Navbar() {
             </Nav.Item>
             <Nav.Item>
               <StyledNavLink to="/our-supporters">Our Supporters</StyledNavLink>
+            </Nav.Item>
+            <Nav.Item>
+              <StyledNavLink to="/our-campaigns">Our Campaigns</StyledNavLink>
             </Nav.Item>
             {/* <Nav.Item>
               <StyledNavLink to="/campaigns">Campaigns</StyledNavLink>

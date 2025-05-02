@@ -76,7 +76,7 @@ const StyledNav = styled(Nav)`
     transition: all 0.3s ease;
     
     &.active {
-      background: linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%);
+      background: #3c4142;
       color: white;
       box-shadow: 0 4px 15px rgba(108, 92, 231, 0.3);
     }
@@ -210,13 +210,12 @@ const AboutSection = () => {
           <motion.div className="col-xl-7" variants={fadeInUp}>
             <ContentContainer className="ps-xl-5">
               <div className="d-flex align-items-center mb-3">
-                <div className="me-3" style={{ width: '40px', height: '3px', background: 'linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%)' }}></div>
+                <div className="me-3" style={{ width: '40px', height: '3px', background: 'linear-gradient(90deg, #3c4142 0%, 100%)' }}></div>
                 <h5 className="text-uppercase fw-bold mb-0" style={{ color: '#000000', letterSpacing: '2px' }}>About Us</h5>
               </div>
               <h1 className="mb-4 display-4 fw-bold" style={{
-                background: 'linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%)',
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
+                color: '#ec1f27',
+
               }}>
                 About SheWings Foundation
               </h1>
@@ -248,7 +247,7 @@ const AboutSection = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                           style={{
-                            background: 'linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%)',
+                            background: '#3c4142',
                             color: 'white',
                             boxShadow: '0 4px 15px rgba(108, 92, 231, 0.3)',
                             border: 'none'
@@ -301,7 +300,7 @@ const AboutSection = () => {
                               rel="noopener noreferrer"
                               className="btn py-2 px-4 rounded-pill d-inline-flex align-items-center"
                               style={{
-                                background: 'linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%)',
+                                background: '#3c4142',
                                 color: 'white',
                                 boxShadow: '0 4px 15px rgba(108, 92, 231, 0.3)',
                                 border: 'none'
@@ -325,9 +324,8 @@ const AboutSection = () => {
         <div className="container-fluid py-5">
           <div className="container py-5">
             <h2 className="text-center mb-5 display-4 fw-bold" style={{
-              background: 'linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%)',
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent'
+              color:'#ec1f27',
+              
             }}>
               Our Impact
             </h2>

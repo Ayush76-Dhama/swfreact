@@ -83,13 +83,13 @@ const CounterItem = styled(motion.div)`
   }
   
   i {
-    color: #6c5ce7;
+    color: #fefdee;
     margin-bottom: 1.5rem;
     font-size: 3rem;
   }
   
   h3 {
-    color: #fff;
+    color: #fefdee;
     font-size: 1.2rem;
     font-weight: 500;
     margin-bottom: 1.5rem;
@@ -97,10 +97,10 @@ const CounterItem = styled(motion.div)`
   
   .counter-counting {
     span {
-      color: #fff;
+      color: #fefdee;
       font-size: 2.5rem;
       font-weight: 700;
-      background: linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%);
+      background: #fefdee;
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -114,7 +114,7 @@ const CounterItem = styled(motion.div)`
 `;
 
 const Button = styled(motion.a)`
-  background: linear-gradient(90deg, #6c5ce7 0%, #a55eea 100%);
+  background: #3c4142;
   color: white;
   padding: 1rem 2.5rem;
   border-radius: 50px;
