@@ -219,6 +219,9 @@ const AboutSection = () => {
               }}>
                 About SheWings Foundation
               </h1>
+              <p className="text-muted mb-4" style={{ fontSize: '0.9rem' }}>
+                Image Source: <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" className="text-decoration-none">Unsplash</a>
+              </p>
               <p className="fs-5 mb-4 text-muted">
                 At SheWings Foundation, our mission is simple yet powerful, to create healthier, happier, and empowered communities by addressing issues that impact women and their families. We believe in the strength of community, the power of knowledge, and the potential of every individual to bring about positive change.
               </p>

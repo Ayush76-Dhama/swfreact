@@ -5,8 +5,8 @@ import { Link } from 'react-router-dom';
 
 // Using different placeholder images for each slide
 // Replace these with your actual images when available
-const slide1 = "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
-const slide2 = "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
+const slide1 = "images/img/navbar/Slider-1.png";
+const slide2 = "images/img/navbar/Slider-2.png";
 const slide3 = "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
 
 const HeroSection = styled(Row)`

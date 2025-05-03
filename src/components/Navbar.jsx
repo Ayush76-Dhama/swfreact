@@ -172,9 +172,9 @@ function Navbar() {
             <Nav.Item>
               <StyledNavLink to="/contact">Contact Us</StyledNavLink>
             </Nav.Item>
-            <Nav.Item>
-              <DonateButton as={NavLink} to="/donate">Donate Now</DonateButton>
-            </Nav.Item>
+              <Nav.Item>
+                <StyledNavLink to="/donation">Donate Now</StyledNavLink>
+              </Nav.Item>
           </Nav>
         </BootstrapNavbar.Collapse>
       </Container>

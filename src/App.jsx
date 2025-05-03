@@ -16,6 +16,7 @@ import VisionMission from './components/VisionMission';
 import Tender from './components/Tender';
 import OurSupporters from './components/OurSupporters';
 import OurCampaigns from './components/OurCampaigns';
+import Donation from './components/Donation';
 
 const App = () => {
   return (
@@ -42,6 +43,7 @@ const App = () => {
         <Route path="/our-supporters" element={<OurSupporters />} />
         <Route path="/campaigns" element={<CampaignsSection />} />
         <Route path="/our-campaigns" element={<OurCampaigns />} />
+        <Route path="/donation" element={<Donation />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<ContactSection />} />
       </Routes>

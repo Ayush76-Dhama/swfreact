@@ -146,7 +146,7 @@ const Navigation = () => {
               <Nav.Link href="/our-campaigns">Our Campaigns</Nav.Link>
               <Nav.Link href="/contact">Contact</Nav.Link>
             </Nav>
-            <DonateButton href="/donate">Donate Now</DonateButton>
+            <DonateButton href="/donation">Donate Now</DonateButton>
           </Navbar.Collapse>
         </Container>
       </StyledNavbar>
