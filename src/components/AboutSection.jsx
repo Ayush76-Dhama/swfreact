@@ -323,12 +323,13 @@ const AboutSection = () => {
           </motion.div>
         </motion.div>
       </div>
+
+
       {isDirectRoute && (
         <div className="container-fluid py-5">
           <div className="container py-5">
             <h2 className="text-center mb-5 display-4 fw-bold" style={{
               color:'#ec1f27',
-              
             }}>
               Our Impact
             </h2>
@@ -354,7 +355,6 @@ const AboutSection = () => {
         </div>
       )}
     </StyledSection>
-
   );
 };
 
