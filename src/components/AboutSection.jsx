@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Tab, Nav } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
-
+import { useLocation } from 'react-router-dom';
 
 const StyledSection = styled(motion.section)`
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -118,15 +118,35 @@ const AboutSection = () => {
   const [activeKey, setActiveKey] = useState('tab-1');
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
+  const location = useLocation();
   const [isDirectRoute, setIsDirectRoute] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     setIsVisible(true);
-    const currentPath = window.location.pathname;
-    setIsDirectRoute(currentPath === '/about');
+    const currentPath = location.pathname;
+    const shouldShowImage = currentPath === '/about' || currentPath === '/';
+    setIsDirectRoute(shouldShowImage);
     console.log('Current Path:', currentPath);
-    console.log('isDirectRoute:', currentPath === '/about');
-  }, []);
+    console.log('Should show image:', shouldShowImage);
+  }, [location.pathname]);
+  
+  const imagePaths = [
+    './images/navbar/aboutuswebsite.png',
+    './images/aboutuswebsite.png',
+    '/images/navbar/aboutuswebsite.png',
+    '/images/aboutuswebsite.png'
+  ];
+
+  const tryNextImage = (e) => {
+    if (currentImageIndex < imagePaths.length - 1) {
+      setCurrentImageIndex(currentImageIndex + 1);
+      e.target.src = imagePaths[currentImageIndex + 1];
+    } else {
+      console.error('All image paths failed');
+      e.target.style.display = 'none';
+    }
+  };
 
   const handleImageLoad = () => {
     setImageLoaded(true);
@@ -145,11 +165,7 @@ const AboutSection = () => {
     }
   };
 
-
-
-
   return (
-
     <StyledSection
       className="container-fluid py-5"
       aria-label="About SheWings"
@@ -157,6 +173,20 @@ const AboutSection = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
+      {isDirectRoute && (
+        <div className="text-center mb-4">
+          <img 
+            src={imagePaths[currentImageIndex]}
+            alt="About SheWings Foundation team and mission"
+            style={{ 
+              maxWidth: '100%', 
+              height: 'auto',
+              margin: '0 auto'
+            }}
+            onError={tryNextImage}
+          />
+        </div>
+      )}
       <div className="container py-5">
         <motion.div
           className="row g-5"

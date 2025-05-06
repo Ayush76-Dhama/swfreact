@@ -143,14 +143,42 @@ const Footer = () => {
           <Col md={3} sm={6} className="mb-4">
             <FooterTitle>Our Gallery</FooterTitle>
             <Row>
-              {[...Array(6)].map((_, idx) => (
-                <Col xs={4} key={idx} className="mb-2">
-                  <GalleryImage
-                    src={`https://via.placeholder.com/80?text=Img+${idx + 1}`}
-                    alt={`gallery-${idx + 1}`}
-                  />
-                </Col>
-              ))}
+              <Col xs={4} className="mb-2">
+                <GalleryImage
+                  src={'/images/img/gallery-1.jpg'}
+                  alt={'gallery-1'}
+                />
+              </Col>
+              <Col xs={4} className="mb-2">
+                <GalleryImage
+                  src={'/images/img/gallery-2.jpg'}
+                  alt={'gallery-2'}
+                />
+              </Col>
+              <Col xs={4} className="mb-2">
+                <GalleryImage
+                  src={'/images/img/gallery-3.jpg'}
+                  alt={'gallery-3'}
+                />
+              </Col>
+              <Col xs={4} className="mb-2">
+                <GalleryImage
+                  src={'/images/img/gallery-4.jpg'}
+                  alt={'gallery-4'}
+                />
+              </Col>
+              <Col xs={4} className="mb-2">
+                <GalleryImage
+                  src={'/images/img/gallery-5.jpg'}
+                  alt={'gallery-5'}
+                />
+              </Col>
+              <Col xs={4} className="mb-2">
+                <GalleryImage
+                  src={'/images/img/gallery-6.jpg'}
+                  alt={'gallery-6'}
+                />
+              </Col>
             </Row>
           </Col>
         </Row>

@@ -4,11 +4,56 @@ import Navbar from "./Navbar";
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
 import "./VisionMission.css";
+import styled from 'styled-components';
+
+const VMBannerResponsive = styled.div`
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+
+  .vm-banner-img {
+    width: 100%;
+    max-width: 100vw;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .desktop-only {
+    display: block;
+    margin-top: 39px;
+  }
+  .mobile-only {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .desktop-only {
+      display: none;
+    }
+    .mobile-only {
+      display: block;
+      margin-top: 90px;
+    }
+  }
+`;
 
 const Mission = () => {
   return (
     <>
       <Navbar />
+      <VMBannerResponsive>
+        <img
+          src="/images/navbar/V&M web.png"
+          alt="Vision & Mission Banner Desktop"
+          className="vm-banner-img desktop-only"
+        />
+        <img
+          src="/images/navbar/V&M mobile.png"
+          alt="Vision & Mission Banner Mobile"
+          className="vm-banner-img mobile-only"
+        />
+      </VMBannerResponsive>
       <div className="vision-mission-container">
         <div className="container-fluid py-5">
           <div className="container py-5 text-center">

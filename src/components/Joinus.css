@@ -1,0 +1,79 @@
+/* joinus.css */
+
+/* Modal container */
+.join-us-modal .modal-content {
+    background-color: #ffffff;
+    border-radius: 20px;
+    padding: 30px 25px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    border: none;
+    max-width: 500px;
+    margin: auto;
+  }
+  
+  /* Modal title */
+  .join-us-modal .modal-title {
+    font-weight: 700;
+    font-size: 1.8rem;
+    text-align: center;
+    color: #333;
+    margin-bottom: 10px;
+  }
+  
+  /* Close button */
+  .join-us-modal .btn-close {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+  }
+  
+  /* Form styling */
+  .join-us-form .form-label {
+    font-weight: 600;
+    color: #444;
+  }
+  
+  .join-us-form .form-control {
+    border-radius: 10px;
+    border: 1px solid #ced4da;
+    padding: 10px 15px;
+    transition: all 0.3s ease;
+  }
+  
+  .join-us-form .form-control:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+    outline: none;
+  }
+  
+  /* Submit button */
+  .join-us-form .btn-primary {
+    border-radius: 50px;
+    background-color: #007bff;
+    border: none;
+    font-weight: 600;
+    padding: 12px;
+    font-size: 1rem;
+    transition: background-color 0.3s ease;
+  }
+  
+  .join-us-form .btn-primary:hover {
+    background-color: #0056b3;
+  }
+  
+  /* Optional: Button outside modal to open it */
+  .join-us-open-btn {
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-weight: 600;
+    font-size: 1rem;
+    background-color: #dc3545;
+    border: none;
+    color: white;
+    transition: background-color 0.3s ease;
+  }
+  
+  .join-us-open-btn:hover {
+    background-color: #c82333;
+  }
+  

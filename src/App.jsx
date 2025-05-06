@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import TopBar from './components/TopBar';
 import HeaderSection from './components/HeaderSection';
@@ -20,7 +20,7 @@ import Donation from './components/Donation';
 
 const App = () => {
   return (
-    <Router>
+    <>
       <TopBar />
       <Navbar />
       <Routes>
@@ -48,7 +48,7 @@ const App = () => {
         <Route path="/contact" element={<ContactSection />} />
       </Routes>
       <Footer />
-    </Router>
+    </>
   );
 };
 

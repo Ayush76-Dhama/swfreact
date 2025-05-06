@@ -2,7 +2,39 @@ import React, { useState } from 'react';
 import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { FaEnvelope, FaPhone } from 'react-icons/fa';
+import Navbar from './Navbar';
 
+const ContactBannerResponsive = styled.div`
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+
+  .tender-banner-img {
+    width: 100%;
+    max-width: 100vw;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .desktop-only {
+    display: block;
+    margin-top: 39px;
+  }
+  .mobile-only {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .desktop-only {
+      display: none;
+    }
+    .mobile-only {
+      display: block;
+      margin-top: 90px;
+    }
+  }
+`;
 const ContactWrapper = styled.div`
   padding: 4rem 0;
   background-color: #FFF5EC;
@@ -109,94 +141,109 @@ function ContactSection() {
   };
   
   return (
-    <ContactWrapper>
-      <Container>
-        <Row>
-          <Col lg={6}>
-            <ContactTitle>Get in Touch</ContactTitle>
-            <ContactDescription>
-              We're here to assist you with any inquiries and welcome your interest in our mission and work. 
-              Whether it's about collaborating, volunteering, or learning more about our programs, we're just a call or message away.
-            </ContactDescription>
+    <>
+      <Navbar />
+      <ContactBannerResponsive>
+        <img
+          src="/images/navbar/Contact us web.png"
+          alt="Tender Banner Desktop"
+          className="tender-banner-img desktop-only"
+        />
+        <img
+          src="/images/navbar/Contact us mobile.png"
+          alt="Tender Banner Mobile"
+          className="tender-banner-img mobile-only"
+        />
+      </ContactBannerResponsive>
+      <ContactWrapper>
+        <Container>
+          <Row>
+            <Col lg={6}>
+              <ContactTitle>Get in Touch</ContactTitle>
+              <ContactDescription>
+                We're here to assist you with any inquiries and welcome your interest in our mission and work. 
+                Whether it's about collaborating, volunteering, or learning more about our programs, we're just a call or message away.
+              </ContactDescription>
+              
+              <Row className="mb-4">
+                <Col md={6}>
+                  <ContactCard>
+                    <ContactInfo>
+                      <h3>Mail Us</h3>
+                      <a href="mailto:info@shewings.com">info@shewings.com</a>
+                    </ContactInfo>
+                  </ContactCard>
+                </Col>
+                <Col md={6}>
+                  <ContactCard>
+                    <ContactInfo>
+                      <h3>Call Us</h3>
+                      <a href="tel:8800633291">8800633291</a>
+                    </ContactInfo>
+                  </ContactCard>
+                </Col>
+              </Row>
+              
+              <StyledForm onSubmit={handleSubmit}>
+                <Form.Control
+                  type="text"
+                  placeholder="Your First Name"
+                  name="firstName"
+                  value={formData.firstName}
+                  onChange={handleChange}
+                  required
+                />
+                <Form.Control
+                  type="email"
+                  placeholder="Your Email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                />
+                <Form.Control
+                  type="tel"
+                  placeholder="Your Phone"
+                  name="phone"
+                  value={formData.phone}
+                  onChange={handleChange}
+                  required
+                />
+                <Form.Control
+                  type="text"
+                  placeholder="Subject"
+                  name="subject"
+                  value={formData.subject}
+                  onChange={handleChange}
+                  required
+                />
+                <Form.Control
+                  as="textarea"
+                  rows={4}
+                  placeholder="Your Message"
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  required
+                />
+                <Button variant="primary" type="submit">
+                  Submit
+                </Button>
+              </StyledForm>
+            </Col>
             
-            <Row className="mb-4">
-              <Col md={6}>
-                <ContactCard>
-                  <ContactInfo>
-                    <h3>Mail Us</h3>
-                    <a href="mailto:info@shewings.com">info@shewings.com</a>
-                  </ContactInfo>
-                </ContactCard>
-              </Col>
-              <Col md={6}>
-                <ContactCard>
-                  <ContactInfo>
-                    <h3>Call Us</h3>
-                    <a href="tel:8800633291">8800633291</a>
-                  </ContactInfo>
-                </ContactCard>
-              </Col>
-            </Row>
-            
-            <StyledForm onSubmit={handleSubmit}>
-              <Form.Control
-                type="text"
-                placeholder="Your First Name"
-                name="firstName"
-                value={formData.firstName}
-                onChange={handleChange}
-                required
-              />
-              <Form.Control
-                type="email"
-                placeholder="Your Email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-              <Form.Control
-                type="tel"
-                placeholder="Your Phone"
-                name="phone"
-                value={formData.phone}
-                onChange={handleChange}
-                required
-              />
-              <Form.Control
-                type="text"
-                placeholder="Subject"
-                name="subject"
-                value={formData.subject}
-                onChange={handleChange}
-                required
-              />
-              <Form.Control
-                as="textarea"
-                rows={4}
-                placeholder="Your Message"
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                required
-              />
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-            </StyledForm>
-          </Col>
-          
-          <Col lg={6}>
-            <ImageSection>
-              <img 
-                src="/images/img/contact.jpg" 
-                alt="SheWings Riders Group" 
-              />
-            </ImageSection>
-          </Col>
-        </Row>
-      </Container>
-    </ContactWrapper>
+            <Col lg={6}>
+              <ImageSection>
+                <img 
+                  src="/images/img/contact.jpg" 
+                  alt="SheWings Riders Group" 
+                />
+              </ImageSection>
+            </Col>
+          </Row>
+        </Container>
+      </ContactWrapper>
+    </>
   );
 }
 

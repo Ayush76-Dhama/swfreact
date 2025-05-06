@@ -2,12 +2,14 @@ import React from 'react';
 import { Row, Col, Container, Carousel, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import Join from './Joinus';
 
 // Using different placeholder images for each slide
 // Replace these with your actual images when available
-const slide1 = "images/img/navbar/Slider-1.png";
-const slide2 = "images/img/navbar/Slider-2.png";
-const slide3 = "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80";
+const slide1 = "/images/navbar/Slider-1.png";
+const slide2 = "/images/navbar/Slider-2.png";
+// const slide3 = "/images/navbar/Slider-1.png";
+
 
 const HeroSection = styled(Row)`
   min-height: 100vh;
@@ -52,11 +54,6 @@ const StyledCarousel = styled(Carousel)`
   .carousel-item {
     height: 100vh;
     
-    /* Large devices (desktops, 1200px and up) */
-    @media (min-width: 1200px) {
-      height: 100vh;
-    }
-    
     /* Medium devices (tablets, 992px to 1199px) */
     @media (max-width: 1199px) {
       height: 90vh;
@@ -70,21 +67,17 @@ const StyledCarousel = styled(Carousel)`
     /* Extra small devices (portrait phones, 576px to 767px) */
     @media (max-width: 767px) {
       height: 70vh;
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
     }
     
     /* Very small devices (small phones, less than 576px) */
     @media (max-width: 575px) {
       height: 60vh;
-    }
-    
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.4); /* Dark overlay for better text visibility */
+      background-position: center center;
+      background-repeat: no-repeat;
+      background-size: cover;
     }
   }
 
@@ -102,6 +95,17 @@ const StyledCarousel = styled(Carousel)`
     padding: 0 15px;
     max-width: 800px;
     margin: 0 auto;
+    width: 100%;
+    
+    @media (max-width: 767px) {
+      padding: 0 10px;
+      bottom: 40%;
+    }
+    
+    @media (max-width: 575px) {
+      bottom: 30%;
+      padding: 0 5px;
+    }
     
     h3 {
       font-size: 3.5rem;
@@ -109,29 +113,22 @@ const StyledCarousel = styled(Carousel)`
       font-weight: 700;
       text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
       
-      /* Large devices (desktops, 1200px and up) */
-      @media (min-width: 1200px) {
-        font-size: 3.5rem;
-      }
-      
-      /* Medium devices (tablets, 992px to 1199px) */
       @media (max-width: 1199px) {
         font-size: 3rem;
       }
       
-      /* Small devices (landscape phones, 768px to 991px) */
       @media (max-width: 991px) {
         font-size: 2.5rem;
       }
       
-      /* Extra small devices (portrait phones, 576px to 767px) */
       @media (max-width: 767px) {
         font-size: 2rem;
+        margin-bottom: 1rem;
       }
       
-      /* Very small devices (small phones, less than 576px) */
       @media (max-width: 575px) {
         font-size: 1.5rem;
+        margin-bottom: 0.75rem;
       }
     }
     
@@ -141,39 +138,35 @@ const StyledCarousel = styled(Carousel)`
       text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
       margin-bottom: 2rem;
       
-      /* Large devices (desktops, 1200px and up) */
-      @media (min-width: 1200px) {
-        font-size: 1.5rem;
-      }
-      
-      /* Medium devices (tablets, 992px to 1199px) */
       @media (max-width: 1199px) {
         font-size: 1.3rem;
       }
       
-      /* Small devices (landscape phones, 768px to 991px) */
       @media (max-width: 991px) {
         font-size: 1.2rem;
       }
       
-      /* Extra small devices (portrait phones, 576px to 767px) */
       @media (max-width: 767px) {
         font-size: 1rem;
+        margin-bottom: 1.5rem;
       }
       
-      /* Very small devices (small phones, less than 576px) */
       @media (max-width: 575px) {
         font-size: 0.9rem;
+        margin-bottom: 1rem;
       }
     }
   }
   
-  /* Style the navigation arrows */
   .carousel-control-prev,
   .carousel-control-next {
     width: 5%;
     opacity: 0.7;
     transition: opacity 0.3s ease;
+    
+    @media (max-width: 767px) {
+      width: 10%;
+    }
     
     &:hover {
       opacity: 1;
@@ -183,12 +176,20 @@ const StyledCarousel = styled(Carousel)`
     .carousel-control-next-icon {
       width: 30px;
       height: 30px;
+      
+      @media (max-width: 767px) {
+        width: 20px;
+        height: 20px;
+      }
     }
   }
   
-  /* Style the indicators */
   .carousel-indicators {
     margin-bottom: 1rem;
+    
+    @media (max-width: 767px) {
+      margin-bottom: 0.5rem;
+    }
     
     button {
       width: 12px;
@@ -199,6 +200,12 @@ const StyledCarousel = styled(Carousel)`
       border: none;
       transition: all 0.3s ease;
       
+      @media (max-width: 767px) {
+        width: 8px;
+        height: 8px;
+        margin: 0 4px;
+      }
+      
       &:hover {
         background-color: rgba(255, 255, 255, 0.8);
       }
@@ -208,16 +215,28 @@ const StyledCarousel = styled(Carousel)`
         transform: scale(1.2);
       }
     }
+  }
+`;
+
+const ButtonContainer = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1rem;
+  
+  @media (max-width: 767px) {
+    gap: 0.5rem;
+  }
+  
+  @media (max-width: 575px) {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
     
-    /* Adjust indicator position for smaller screens */
-    @media (max-width: 767px) {
-      margin-bottom: 0.5rem;
-      
-      button {
-        width: 10px;
-        height: 10px;
-        margin: 0 4px;
-      }
+    button, a {
+      width: 100%;
+      max-width: 250px;
+      margin: 0.25rem 0;
     }
   }
 `;
@@ -227,9 +246,17 @@ const HeroButton = styled(Button)`
   border-color: var(--primary-color);
   padding: 0.75rem 1.5rem;
   font-weight: 600;
-  margin-right: 1rem;
-  margin-bottom: 1rem;
   transition: all 0.3s ease;
+  
+  @media (max-width: 767px) {
+    padding: 0.5rem 1.25rem;
+    font-size: 0.9rem;
+  }
+  
+  @media (max-width: 575px) {
+    padding: 0.5rem 1rem;
+    font-size: 0.85rem;
+  }
   
   &:hover {
     background-color: #e03d5d;
@@ -240,32 +267,14 @@ const HeroButton = styled(Button)`
   
   &.btn-outline-light {
     &:hover {
-      background-color: rgba(255, 255, 255, 0.1);
       color: white;
-    }
-  }
-`;
-
-const ButtonContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  
-  @media (max-width: 575px) {
-    flex-direction: column;
-    align-items: center;
-    
-    ${HeroButton} {
-      margin-right: 0;
-      width: 100%;
-      max-width: 250px;
     }
   }
 `;
 
 const HeaderSection = () => (
   <HeroSection className="text-white">
-    <StyledCarousel 
+    <StyledCarousel
       indicators={true}
       controls={true}
       interval={5000}
@@ -279,12 +288,13 @@ const HeaderSection = () => (
           alt="Empowering Women"
         />
         <Carousel.Caption>
-          <h3>Empowering Women</h3>
-          <p>Supporting women's health and wellness initiatives</p>
+
           <ButtonContainer>
-            <HeroButton as={Link} to="/about">Learn More</HeroButton>
-            <HeroButton as={Link} to="/contact" variant="outline-light">Contact Us</HeroButton>
+            {/* <HeroButton>{Join}</HeroButton> */}
+            <Join />
+            {/* <HeroButton as={Link} to="/contact" variant="outline-light">Contact Us</HeroButton> */}
           </ButtonContainer>
+
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
@@ -293,26 +303,25 @@ const HeaderSection = () => (
           alt="Community Impact"
         />
         <Carousel.Caption>
-          <h3>Community Impact</h3>
-          <p>Creating lasting positive change in communities</p>
+
           <ButtonContainer>
-            <HeroButton as={Link} to="/impact">Our Impact</HeroButton>
-            <HeroButton as={Link} to="/campaigns" variant="outline-light">Our Campaigns</HeroButton>
+            <Join />
           </ButtonContainer>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        <img
+        {/* <img
           src={slide3}
           alt="Join Our Mission"
-        />
+        /> */}
         <Carousel.Caption>
-          <h3>Join Our Mission</h3>
-          <p>Together we can make a difference</p>
+          {/* <h3>Join Our Mission</h3>
+          <p>Together we can make a difference</p> */}
           <ButtonContainer>
-            <HeroButton as={Link} to="/donate">Donate Now</HeroButton>
-            <HeroButton as={Link} to="/contact" variant="outline-light">Get Involved</HeroButton>
+            <Join />
+            {/* <HeroButton as={Link} to="/contact" variant="outline-light">Get Involved</HeroButton> */}
           </ButtonContainer>
+
         </Carousel.Caption>
       </Carousel.Item>
     </StyledCarousel>

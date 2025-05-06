@@ -1,6 +1,39 @@
 import React from "react";
 import "./OurSupporters.css";
 import Navbar from "./Navbar";
+import styled from "styled-components";
+
+const OurSupportersBannerResponsive = styled.div`
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+
+  .tender-banner-img {
+    width: 100%;
+    max-width: 100vw;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .desktop-only {
+    display: block;
+    margin-top: 39px;
+  }
+  .mobile-only {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .desktop-only {
+      display: none;
+    }
+    .mobile-only {
+      display: block;
+      margin-top: 90px;
+    }
+  }
+`;
 
 const images = [
   "/images/img/supporters/s.png",
@@ -17,9 +50,21 @@ const OurSupporters = () => {
   return (
     <>
       <Navbar />
+      <OurSupportersBannerResponsive>
+        <img
+          src="/images/navbar/support web.png"
+          alt="Tender Banner Desktop"
+          className="tender-banner-img desktop-only"
+        />
+        <img
+          src="/images/navbar/support mobile.png"
+          alt="Tender Banner Mobile"
+          className="tender-banner-img mobile-only"
+        />
+      </OurSupportersBannerResponsive>
       <br />
       <div className="supporters-container">
-        <h2 className="section-title">Our Supporters</h2>
+        {/* <h2 className="section-title">Our Supporters</h2> */}
         <div className="gallery-container d-flex justify-content-center align-items-center">
           <div className="box">
             {images.map((src, index) => (

@@ -6,6 +6,37 @@ import styled from 'styled-components';
 import { motion } from 'framer-motion';
 import ImpactSection from './ImpactSection';
 
+const ImpactBannerResponsive = styled.div`
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+
+  .impact-banner-img {
+    width: 100%;
+    max-width: 100vw;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .desktop-only {
+    display: block;
+  }
+  .mobile-only {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .desktop-only {
+      display: none;
+    }
+    .mobile-only {
+      display: block;
+      padding-top: 105px;
+    }
+  }
+`;
+
 const StyledSection = styled(motion.section)`
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
   position: relative;
@@ -154,6 +185,18 @@ const AnimatedContainer = styled(motion.div)`
 const ImpactPage = () => {
   return (
     <div className="bg-white text-dark">
+      <ImpactBannerResponsive>
+        <img
+          src="/images/navbar/impactweb.png"
+          alt="Impact Banner Desktop"
+          className="impact-banner-img desktop-only"
+        />
+        <img
+          src="/images/navbar/impactmobile.png"
+          alt="Impact Banner Mobile"
+          className="impact-banner-img mobile-only"
+        />
+      </ImpactBannerResponsive>
       <StyledSection
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
@@ -165,13 +208,9 @@ const ImpactPage = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <h1 className="display-3 fw-bold text-center mb-4">
-              <GradientText>IMPACT</GradientText>
-            </h1>
-            <p className="lead fst-italic text-center mb-5 fs-3">
-              Real stories, real change—see how we make a difference
-            </p>
+            
           </motion.div>
+          
 
           <AnimatedContainer
             initial={{ opacity: 0, y: 20 }}
@@ -222,7 +261,7 @@ const ImpactPage = () => {
               {[
                 { title: 'Girl Child Education', text: 'SheWings Foundation advocates for accessible and inclusive education for girls. We focus on bridging the educational gap, offering resources and scholarships, and creating mentorship programs that empower girls.' },
                 { title: 'Environment and Sustainability', text: 'SheWings supports projects in renewable energy, waste management, and climate action. We collaborate with local communities to promote eco-friendly practices.' },
-                { title: "Women's Health and Hygiene", text: 'We advocate for women’s health and menstrual hygiene. We conduct awareness campaigns and provide affordable access to essential products.' },
+                { title: "Women's Health and Hygiene", text: 'We advocate for women\'s health and menstrual hygiene. We conduct awareness campaigns and provide affordable access to essential products.' },
                 { title: 'Skill Development and Healthcare', text: 'We enhance employability and economic independence among women by providing vocational training and healthcare services.' },
                 { title: 'Minority Affairs', text: 'SheWings champions the rights and needs of minority communities by providing platforms for marginalized voices and promoting inclusivity.' },
                 { title: 'Food and Nutrition Security', text: 'We tackle food scarcity and malnutrition through meal distribution and awareness programs to improve nutritional standards.' }

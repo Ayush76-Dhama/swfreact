@@ -1,6 +1,40 @@
 import React from "react";
 import "./OurCampaigns.css";
+import Navbar from "./Navbar";
+import styled from "styled-components";
 
+
+const OurCampaignsBannerResponsive = styled.div`
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+
+  .tender-banner-img {
+    width: 100%;
+    max-width: 100vw;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .desktop-only {
+    display: block;
+    margin-top: 39px;
+  }
+  .mobile-only {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .desktop-only {
+      display: none;
+    }
+    .mobile-only {
+      display: block;
+      margin-top: 90px;
+    }
+  }
+`;
 const campaignsData = [
     
   {
@@ -40,6 +74,19 @@ const campaignsData = [
 const OurCampaigns = () => {
   return (
     <>
+      <Navbar />
+      <OurCampaignsBannerResponsive>
+        <img
+          src="/images/navbar/BannerCampaign.png"
+          alt="Tender Banner Desktop"
+          className="tender-banner-img desktop-only"
+        />
+        <img
+          src="/images/navbar/BannerCampaignM.png"
+          alt="Tender Banner Mobile"
+          className="tender-banner-img mobile-only"
+        />
+      </OurCampaignsBannerResponsive>
       <br />
       <br />
       <div className="container mt-4">
