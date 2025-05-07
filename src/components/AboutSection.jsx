@@ -114,21 +114,43 @@ const CardContainer = styled.div`
   }
 `;
 
+const AboutBannerResponsive = styled.div`
+  width: 100%;
+  text-align: center;
+  background: #fff;
+  margin: 0;
+  padding: 0;
+
+  .about-banner-img {
+    width: 100%;
+    max-width: 100vw;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+  }
+  .desktop-only {
+    display: block;
+    margin-top: 39px;
+  }
+  .mobile-only {
+    display: none;
+  }
+  @media (max-width: 768px) {
+    .desktop-only {
+      display: none;
+    }
+    .mobile-only {
+      display: block;
+      margin-top: 90px;
+    }
+  }
+`;
+
 const AboutSection = () => {
-  const [activeKey, setActiveKey] = useState('tab-1');
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [isDirectRoute, setIsDirectRoute] = useState(false);
   const location = useLocation();
-  const [isDirectRoute, setIsDirectRoute] = useState(false);
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
-
-  const imagePaths = [
-    './images/navbar/aboutuswebsite.png',
-    './images/about us mobile.png',
-    
-  ];
 
   useEffect(() => {
     setIsVisible(true);
@@ -137,16 +159,6 @@ const AboutSection = () => {
     setImageLoaded(shouldShowImage);
     setIsDirectRoute(currentPath === '/about');
   }, [location.pathname]);
-
-  const tryNextImage = (e) => {
-    if (currentImageIndex < imagePaths.length - 1) {
-      setCurrentImageIndex(currentImageIndex + 1);
-      e.target.src = imagePaths[currentImageIndex + 1];
-    } else {
-      console.error('All image paths failed');
-      e.target.style.display = 'none';
-    }
-  };
 
   const handleImageLoad = () => {
     setImageLoaded(true);
@@ -177,7 +189,7 @@ const AboutSection = () => {
       <img
         src={src}
         className={!imageLoaded ? 'invisible' : ''}
-        alt={alt}
+        alty={alt}
         onLoad={handleImageLoad}
         onError={(e) => {
           console.error(`Failed to load image: ${src}`);
@@ -192,16 +204,31 @@ const AboutSection = () => {
   );
 
   return (
-    <StyledSection
-      className="container-fluid py-5"
-      aria-label="About SheWings"
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      transition={{ duration: 0.5 }}
-    >
+    <>
+      {location.pathname === '/about' && (
+        <AboutBannerResponsive>
+          <img
+            src="/images/navbar/aboutuswebsite.png"
+            alt="About Us Banner Desktop"
+            className="about-banner-img desktop-only"
+          />
+          <img
+            src="/images/navbar/about us mobile.png"
+            alt="About Us Banner Mobile"
+            className="about-banner-img mobile-only"
+          />
+        </AboutBannerResponsive>
+      )}
+      <StyledSection
+        className="container-fluid py-5"
+        aria-label="About SheWings"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.5 }}
+      >
       {location.pathname === '/about' && imageLoaded && (
         <div className="text-center mb-4">
-          <img 
+          {/* <img 
             src={imagePaths[currentImageIndex]}
             className="img-fluid rounded-3 shadow-sm"
             alt="About SheWings Foundation team and mission"
@@ -211,7 +238,7 @@ const AboutSection = () => {
               margin: '0 auto' 
             }}
             onError={tryNextImage}
-          />
+          /> */}
         </div>
       )}
       <div className="container py-5">
@@ -222,14 +249,120 @@ const AboutSection = () => {
           variants={staggerChildren}
         >
           <motion.div className="col-xl-5" variants={fadeInUp}>
-            {renderImage('/images/img/about-1.jpg', 'About SheWings Foundation mission')}
-            {renderImage('/images/img/about-2.jpg', 'About SheWings Foundation team')}
+            {renderImage('/images/img/about-3.jpg', 'About SheWings Foundation mission')}
+            {renderImage('/images/img/about-3.jpg', 'About SheWings Foundation team')}
+          </motion.div>
+          <motion.div className="col-xl-7" variants={fadeInUp}>
+            <ContentContainer className="ps-xl-5">
+              <div className="d-flex align-items-center mb-3">
+                <div className="me-3" style={{ width: '40px', height: '3px', background: 'linear-gradient(90deg, #3c4142 0%, 100%)' }}></div>
+                <h5 className="text-uppercase fw-bold mb-0" style={{ color: '#000000', letterSpacing: '2px' }}>About Us</h5>
+              </div>
+              <h1 className="mb-4 display-4 fw-bold" style={{ color: '#ec1f27' }}>
+                About SheWings Foundation
+              </h1>
+              <p className="text-muted mb-4" style={{ fontSize: '0.9rem' }}>
+                Image Source: <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" className="text-decoration-none">Unsplash</a>
+              </p>
+              <p className="fs-5 mb-4 text-muted">
+                At SheWings Foundation, our mission is simple yet powerful, to create healthier, happier, and empowered communities by addressing issues that impact women and their families. We believe in the strength of community, the power of knowledge, and the potential of every individual to bring about positive change.
+              </p>
+              <TabContainer>
+                <Tab.Container defaultActiveKey="tab-1">
+                  <StyledNav variant="pills" className="d-flex justify-content-center gap-3 mb-4">
+                    <Nav.Item>
+                      <Nav.Link eventKey="tab-1">About</Nav.Link>
+                    </Nav.Item>
+                    <Nav.Item>
+                      <Nav.Link eventKey="tab-4">Story</Nav.Link>
+                    </Nav.Item>
+                  </StyledNav>
+                  <Tab.Content>
+                    <Tab.Pane eventKey="tab-1">
+                      <div className="text-start my-auto">
+                        <h5 className="text-uppercase mb-3 mt-3 fw-bold">About SheWings Foundation</h5>
+                        <p className="mb-4 text-muted">
+                          At SheWings Foundation, we believe that access to health education and essential resources should be a universal right. Our foundation was created to address the deep-rooted lack of healthcare awareness, especially in areas where conversations around menstrual health, reproductive health, and maternal wellness are often limited or stigmatized.
+                        </p>
+                        <motion.a
+                          className="btn py-2 px-4 rounded-pill"
+                          href="/about-us"
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          style={{
+                            background: '#3c4142',
+                            color: 'white',
+                            boxShadow: '0 4px 15px rgba(108, 92, 231, 0.3)',
+                            border: 'none'
+                          }}
+                          whileHover={{ y: -3 }}
+                          whileTap={{ scale: 0.98 }}
+                        >
+                          Read More
+                        </motion.a>
+                      </div>
+                    </Tab.Pane>
+                    <Tab.Pane eventKey="tab-4">
+                      <div className="text-start my-auto">
+                        <h5 className="text-uppercase mb-3 mt-3 fw-bold">Our Campaigns</h5>
+                        <ul className="list-unstyled">
+                          {[
+                            { title: 'Woman Health Awareness Programme', link: 'https://zeenews.india.com/...' },
+                            { title: '#DonateOldBraPanty', link: 'https://newsroompost.com/...' },
+                            { title: '#RedDotCampaign', link: 'https://newsroompost.com/...' },
+                            { title: '#YesIBleed', link: 'https://newsroompost.com/...' },
+                            { title: '#FeedTheFuture', link: 'https://newsroompost.com/...' }
+                          ].map((item, index) => (
+                            <motion.li
+                              key={index}
+                              className="mb-3"
+                              whileHover={{ x: 5 }}
+                            >
+                              <a
+                                href={item.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-decoration-none text-dark d-flex align-items-center p-2 rounded"
+                                style={{
+                                  transition: 'all 0.3s ease',
+                                  backgroundColor: 'rgba(255, 255, 255, 0.5)'
+                                }}
+                              >
+                                <span className="me-2" style={{ color: '#6c5ce7' }}>→</span>
+                                <span>{item.title}</span>
+                              </a>
+                            </motion.li>
+                          ))}
+                          <motion.li
+                            className="mt-4"
+                            whileHover={{ y: -3 }}
+                          >
+                            <a
+                              href="https://www.youtube.com/watch?v=jnxrBBCg8Kg"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn py-2 px-4 rounded-pill d-inline-flex align-items-center"
+                              style={{
+                                background: '#3c4142',
+                                color: 'white',
+                                boxShadow: '0 4px 15px rgba(108, 92, 231, 0.3)',
+                                border: 'none'
+                              }}
+                            >
+                              <span className="me-2">▶</span>
+                              <span>Watch Video</span>
+                            </a>
+                          </motion.li>
+                        </ul>
+                      </div>
+                    </Tab.Pane>
+                  </Tab.Content>
+                </Tab.Container>
+              </TabContainer>
+            </ContentContainer>
           </motion.div>
         </motion.div>
       </div>
-<<<<<<< HEAD
-
-
       {isDirectRoute && (
         <div className="container-fluid py-5">
           <div className="container py-5">
@@ -259,9 +392,8 @@ const AboutSection = () => {
           </div>
         </div>
       )}
-=======
->>>>>>> 18119214d3627a10989229e8a716d2c886982c73
     </StyledSection>
+    </>
   );
 };
 

@@ -6,9 +6,7 @@ import Join from './Joinus';
 
 // Using different placeholder images for each slide
 // Replace these with your actual images when available
-const slide1 = "/images/navbar/Slider-1.png";
-const slide2 = "/images/navbar/Slider-2.png";
-// const slide3 = "/images/navbar/Slider-1.png";
+// Removed unused slide1 and slide2 variables
 
 
 const HeroSection = styled(Row)`
@@ -53,144 +51,69 @@ const StyledCarousel = styled(Carousel)`
 
   .carousel-item {
     height: 100vh;
-    
-    /* Medium devices (tablets, 992px to 1199px) */
-    @media (max-width: 1199px) {
-      height: 90vh;
-    }
-    
-    /* Small devices (landscape phones, 768px to 991px) */
-    @media (max-width: 991px) {
-      height: 80vh;
-    }
-    
-    /* Extra small devices (portrait phones, 576px to 767px) */
-    @media (max-width: 767px) {
-      height: 70vh;
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
-    
-    /* Very small devices (small phones, less than 576px) */
-    @media (max-width: 575px) {
-      height: 60vh;
-      background-position: center center;
-      background-repeat: no-repeat;
-      background-size: cover;
-    }
+    @media (max-width: 1199px) { height: 90vh; }
+    @media (max-width: 991px) { height: 80vh; }
+    @media (max-width: 767px) { height: 60vh; }
+    @media (max-width: 575px) { height: 50vh; }
   }
 
-  img {
+  .desktop-only, .mobile-only {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    object-position: center;
+  }
+
+  @media (max-width: 767px) {
+    .mobile-only {
+      object-fit: contain;
+      background: #fff;
+    }
   }
 
   .carousel-caption {
-    bottom: 50%;
-    transform: translateY(50%);
-    z-index: 2;
-    padding: 0 15px;
-    max-width: 800px;
-    margin: 0 auto;
-    width: 100%;
-    
+    bottom: 10%;
+    transform: none;
+    padding: 0 10px;
     @media (max-width: 767px) {
-      padding: 0 10px;
-      bottom: 40%;
-    }
-    
-    @media (max-width: 575px) {
-      bottom: 30%;
+      bottom: 5%;
       padding: 0 5px;
     }
-    
     h3 {
-      font-size: 3.5rem;
-      margin-bottom: 1.5rem;
-      font-weight: 700;
-      text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-      
-      @media (max-width: 1199px) {
-        font-size: 3rem;
-      }
-      
-      @media (max-width: 991px) {
-        font-size: 2.5rem;
-      }
-      
+      font-size: 2rem;
+      margin-bottom: 1rem;
       @media (max-width: 767px) {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-      }
-      
-      @media (max-width: 575px) {
-        font-size: 1.5rem;
-        margin-bottom: 0.75rem;
+        font-size: 1.2rem;
+        margin-bottom: 0.5rem;
       }
     }
-    
     p {
-      font-size: 1.5rem;
-      line-height: 1.5;
-      text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
-      margin-bottom: 2rem;
-      
-      @media (max-width: 1199px) {
-        font-size: 1.3rem;
-      }
-      
-      @media (max-width: 991px) {
-        font-size: 1.2rem;
-      }
-      
+      font-size: 1rem;
+      margin-bottom: 1rem;
       @media (max-width: 767px) {
-        font-size: 1rem;
-        margin-bottom: 1.5rem;
-      }
-      
-      @media (max-width: 575px) {
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
       }
     }
   }
-  
+
   .carousel-control-prev,
   .carousel-control-next {
     width: 5%;
     opacity: 0.7;
     transition: opacity 0.3s ease;
-    
-    @media (max-width: 767px) {
-      width: 10%;
-    }
-    
-    &:hover {
-      opacity: 1;
-    }
-    
+    @media (max-width: 767px) { width: 10%; }
+    &:hover { opacity: 1; }
     .carousel-control-prev-icon,
     .carousel-control-next-icon {
       width: 30px;
       height: 30px;
-      
-      @media (max-width: 767px) {
-        width: 20px;
-        height: 20px;
-      }
+      @media (max-width: 767px) { width: 20px; height: 20px; }
     }
   }
-  
+
   .carousel-indicators {
     margin-bottom: 1rem;
-    
-    @media (max-width: 767px) {
-      margin-bottom: 0.5rem;
-    }
-    
+    @media (max-width: 767px) { margin-bottom: 0.5rem; }
     button {
       width: 12px;
       height: 12px;
@@ -199,21 +122,9 @@ const StyledCarousel = styled(Carousel)`
       background-color: rgba(255, 255, 255, 0.5);
       border: none;
       transition: all 0.3s ease;
-      
-      @media (max-width: 767px) {
-        width: 8px;
-        height: 8px;
-        margin: 0 4px;
-      }
-      
-      &:hover {
-        background-color: rgba(255, 255, 255, 0.8);
-      }
-      
-      &.active {
-        background-color: #fff;
-        transform: scale(1.2);
-      }
+      @media (max-width: 767px) { width: 8px; height: 8px; margin: 0 4px; }
+      &:hover { background-color: rgba(255, 255, 255, 0.8); }
+      &.active { background-color: #fff; transform: scale(1.2); }
     }
   }
 `;
@@ -223,52 +134,19 @@ const ButtonContainer = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   gap: 1rem;
-  
   @media (max-width: 767px) {
     gap: 0.5rem;
-  }
-  
-  @media (max-width: 575px) {
     flex-direction: column;
     align-items: center;
-    width: 100%;
-    
-    button, a {
-      width: 100%;
-      max-width: 250px;
-      margin: 0.25rem 0;
-    }
   }
 `;
 
 const HeroButton = styled(Button)`
-  background-color: var(--primary-color);
-  border-color: var(--primary-color);
-  padding: 0.75rem 1.5rem;
-  font-weight: 600;
-  transition: all 0.3s ease;
-  
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
   @media (max-width: 767px) {
-    padding: 0.5rem 1.25rem;
+    width: 100%;
     font-size: 0.9rem;
-  }
-  
-  @media (max-width: 575px) {
-    padding: 0.5rem 1rem;
-    font-size: 0.85rem;
-  }
-  
-  &:hover {
-    background-color: #e03d5d;
-    border-color: #e03d5d;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  }
-  
-  &.btn-outline-light {
-    &:hover {
-      color: white;
-    }
   }
 `;
 
@@ -283,45 +161,41 @@ const HeaderSection = () => (
       fade={true}
     >
       <Carousel.Item>
-        <img
-          src={slide1}
-          alt="Empowering Women"
-        />
+        <>
+          <img
+            src="/images/navbar/Slider-1.png"
+            alt="Empowering Women"
+            className="desktop-only"
+          />
+          <img
+            src="/images/navbar/Slider-1M.png"
+            alt="Empowering Women Mobile"
+            className="mobile-only"
+          />
+        </>
         <Carousel.Caption>
-
-          <ButtonContainer>
-            {/* <HeroButton>{Join}</HeroButton> */}
-            <Join />
-            {/* <HeroButton as={Link} to="/contact" variant="outline-light">Contact Us</HeroButton> */}
-          </ButtonContainer>
-
-        </Carousel.Caption>
-      </Carousel.Item>
-      <Carousel.Item>
-        <img
-          src={slide2}
-          alt="Community Impact"
-        />
-        <Carousel.Caption>
-
           <ButtonContainer>
             <Join />
           </ButtonContainer>
         </Carousel.Caption>
       </Carousel.Item>
       <Carousel.Item>
-        {/* <img
-          src={slide3}
-          alt="Join Our Mission"
-        /> */}
+        <>
+          <img
+            src="/images/navbar/Slider-2.png"
+            alt="Community Impact"
+            className="desktop-only"
+          />
+          <img
+            src="/images/navbar/Slider-2M.png"
+            alt="Community Impact Mobile"
+            className="mobile-only"
+          />
+        </>
         <Carousel.Caption>
-          {/* <h3>Join Our Mission</h3>
-          <p>Together we can make a difference</p> */}
           <ButtonContainer>
             <Join />
-            {/* <HeroButton as={Link} to="/contact" variant="outline-light">Get Involved</HeroButton> */}
           </ButtonContainer>
-
         </Carousel.Caption>
       </Carousel.Item>
     </StyledCarousel>
