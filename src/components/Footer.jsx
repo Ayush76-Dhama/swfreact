@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Container, Row, Col, Form, Button } from 'react-bootstrap';
+import { Container, Row, Col, Form, Button, Alert } from 'react-bootstrap';
 import styled from 'styled-components';
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn, FaArrowUp } from 'react-icons/fa';
+import axios from 'axios';
 
 const StyledFooter = styled.footer`
   background-color: #212529;
@@ -84,6 +85,32 @@ const GalleryImage = styled.img`
 `;
 
 const Footer = () => {
+  const [formData, setFormData] = useState({ email: '' });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [success, setSuccess] = useState(false);
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+    setSuccess(false);
+
+    try {
+      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/subscribe`, formData);
+      setSuccess(true);
+      setFormData({ email: '' });
+    } catch (err) {
+      setError(err.response?.data?.message || 'Error submitting form. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <StyledFooter>
       <Container>
@@ -94,18 +121,26 @@ const Footer = () => {
             <p>
               Subscribe to our newsletter to receive updates about our initiatives and events.
             </p>
-            <Form className="mt-3">
+            <Form className="mt-3" onSubmit={handleSubmit}>
+              {error && <Alert variant="danger" className="mb-3">{error}</Alert>}
+              {success && <Alert variant="success" className="mb-3">Thank you for subscribing!</Alert>}
               <Form.Group className="d-flex">
                 <Form.Control 
                   type="email" 
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
                   placeholder="Enter your email" 
                   className="rounded-0"
+                  required
                 />
                 <Button 
                   variant="primary" 
                   className="rounded-0"
+                  type="submit"
+                  disabled={loading}
                 >
-                  Subscribe
+                  {loading ? 'Subscribing...' : 'Subscribe'}
                 </Button>
               </Form.Group>
             </Form>

@@ -3,6 +3,8 @@ import { Container, Row, Col, Form, Button } from 'react-bootstrap';
 import styled from 'styled-components';
 import { FaEnvelope, FaPhone } from 'react-icons/fa';
 import Navbar from './Navbar';
+import axios from 'axios';
+
 
 const ContactBannerResponsive = styled.div`
   width: 100%;
@@ -113,12 +115,14 @@ const ImageSection = styled.div`
 
 function ContactSection() {
   const [formData, setFormData] = useState({
-    firstName: '',
+    name: '',
     email: '',
     phone: '',
     subject: '',
     message: ''
   });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
   
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -128,16 +132,26 @@ function ContactSection() {
     }));
   };
   
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    setFormData({
-      firstName: '',
-      email: '',
-      phone: '',
-      subject: '',
-      message: ''
-    });
+    setLoading(true);
+    setError('');
+
+    try {
+      await axios.post('http://localhost:3000/api/contact', formData);
+      alert('Form submitted successfully!');
+      setFormData({
+        name: '',
+        email: '',
+        phone: '',
+        subject: '',
+        message: ''
+      });
+    } catch (err) {
+      setError(err.response?.data?.message || 'Error submitting form. Please try again.');
+    } finally {
+      setLoading(false);
+    }
   };
   
   return (
@@ -185,11 +199,12 @@ function ContactSection() {
               </Row>
               
               <StyledForm onSubmit={handleSubmit}>
+                {error && <div className="alert alert-danger">{error}</div>}
                 <Form.Control
                   type="text"
                   placeholder="Your First Name"
-                  name="firstName"
-                  value={formData.firstName}
+                  name="name"
+                  value={formData.name}
                   onChange={handleChange}
                   required
                 />
@@ -226,8 +241,8 @@ function ContactSection() {
                   onChange={handleChange}
                   required
                 />
-                <Button variant="primary" type="submit">
-                  Submit
+                <Button variant="primary" type="submit" disabled={loading}>
+                  {loading ? 'Submitting...' : 'Submit'}
                 </Button>
               </StyledForm>
             </Col>
