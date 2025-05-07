@@ -3,39 +3,6 @@ import { Tab, Nav } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
-import Navbar from './Navbar';
-
-const AboutBannerResponsive = styled.div`
-  width: 100%;
-  text-align: center;
-  background: #fff;
-  margin: 0;
-  padding: 0;
-
-  .tender-banner-img {
-    width: 100%;
-    max-width: 100vw;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-  }
-  .desktop-only {
-    display: block;
-    margin-top: 39px;
-  }
-  .mobile-only {
-    display: none;
-  }
-  @media (max-width: 768px) {
-    .desktop-only {
-      display: none;
-    }
-    .mobile-only {
-      display: block;
-      margin-top: 90px;
-    }
-  }
-`;
 
 const StyledSection = styled(motion.section)`
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -152,6 +119,8 @@ const AboutSection = () => {
   const [imageLoaded, setImageLoaded] = useState(false);
   const [isVisible, setIsVisible] = useState(false);
   const location = useLocation();
+  const [isDirectRoute, setIsDirectRoute] = useState(false);
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
 
   useEffect(() => {
     setIsVisible(true);
@@ -164,9 +133,8 @@ const AboutSection = () => {
   
   const imagePaths = [
     './images/navbar/aboutuswebsite.png',
-    './images/aboutuswebsite.png',
-    '/images/navbar/aboutuswebsite.png',
-    '/images/aboutuswebsite.png'
+    './images/about us mobile.png',
+    
   ];
 
   const tryNextImage = (e) => {
@@ -212,7 +180,7 @@ const AboutSection = () => {
             style={{ 
               maxWidth: '100%', 
               height: 'auto',
-              margin: '0 auto'
+              margin: '0 auto' 
             }}
             onError={tryNextImage}
           />
@@ -414,8 +382,8 @@ const AboutSection = () => {
             </div>
           </div>
         </div>
-      </StyledSection>
-    </>
+      )}
+    </StyledSection>
   );
 };
 
