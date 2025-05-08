@@ -2,8 +2,16 @@ import React, { useState, useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { Navbar as BootstrapNavbar, Container, Nav, Button } from 'react-bootstrap';
 import styled from 'styled-components';
+import TopBar from './TopBar';
 
-
+const NavbarWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1030;
+  background: white;
+`;
 
 const StyledNavbar = styled(BootstrapNavbar)`
   background-color: white;
@@ -61,7 +69,7 @@ const DonateButton = styled(Button)`
   transition: all 0.3s ease;
   
   &:hover {
-    background-color: #e03d5d;
+    background-color: #3c4142;
     border-color: #e03d5d;
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -87,6 +95,21 @@ const NavbarToggle = styled(BootstrapNavbar.Toggle)`
   
   .navbar-toggler-icon {
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(0, 0, 0, 0.55)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  }
+`;
+
+const DonateNavLink = styled(StyledNavLink)`
+  background: #dc3545;
+  color: white !important;
+  border: none;
+  border-radius: 25px;
+  padding: 10px 20px;
+  font-weight: 600;
+  margin-left: 10px;
+  display: inline-block;
+  &:hover {
+    background: #c82333;
+    color: #fff !important;
   }
 `;
 
@@ -117,68 +140,68 @@ function Navbar() {
   }, []);
 
   return (
-    <StyledNavbar 
-      expand="lg" 
-      fixed="top" 
-      expanded={expanded}
-      className={scrolled ? 'scrolled' : ''}
-    >
-      
-      <Container>
-      
-        <BootstrapNavbar.Brand as={NavLink} to="/">
-          <Logo 
-            src="/images/img/logo/logo2.jpg" 
-            alt="SheWings Logo" 
-            onError={(e) => {
-              e.target.onerror = null;
-              e.target.src = "https://via.placeholder.com/150x50?text=SheWings";
-            }}
+    <NavbarWrapper>
+      <TopBar />
+      <StyledNavbar 
+        expand="lg" 
+        expanded={expanded}
+        className={scrolled ? 'scrolled' : ''}
+      >
+        <Container>
+          <BootstrapNavbar.Brand as={NavLink} to="/">
+            <Logo 
+              src="/images/img/logo/logo2.jpg" 
+              alt="SheWings Logo" 
+              onError={(e) => {
+                e.target.onerror = null;
+                e.target.src = "https://via.placeholder.com/150x50?text=SheWings";
+              }}
+            />
+          </BootstrapNavbar.Brand>
+          <NavbarToggle
+            aria-controls="basic-navbar-nav"
+            onClick={() => setExpanded(!expanded)}
           />
-        </BootstrapNavbar.Brand>
-        <NavbarToggle
-          aria-controls="basic-navbar-nav"
-          onClick={() => setExpanded(!expanded)}
-        />
-        <BootstrapNavbar.Collapse id="basic-navbar-nav">
-          <Nav className="ms-auto">
-            <Nav.Item>
-              <StyledNavLink to="/" end>Home</StyledNavLink>
-            </Nav.Item>
-            <Nav.Item>
-              <StyledNavLink to="/about">About Us</StyledNavLink>
-            </Nav.Item>
-            <Nav.Item>
-              <StyledNavLink to="/impact">Impact</StyledNavLink>
-            </Nav.Item>
-            <Nav.Item>
-              <StyledNavLink to="/vision-mission">Vision & Mission</StyledNavLink>
-            </Nav.Item>
-            <Nav.Item>
-              <StyledNavLink to="/tender">Tender</StyledNavLink>
-            </Nav.Item>
-            <Nav.Item>
-              <StyledNavLink to="/our-supporters">Our Supporters</StyledNavLink>
-            </Nav.Item>
-            <Nav.Item>
-              <StyledNavLink to="/our-campaigns">Our Campaigns</StyledNavLink>
-            </Nav.Item>
-            {/* <Nav.Item>
-              <StyledNavLink to="/campaigns">Campaigns</StyledNavLink>
-            </Nav.Item> */}
-            {/* <Nav.Item>
-              <StyledNavLink to="/gallery">Gallery</StyledNavLink>
-            </Nav.Item> */}
-            <Nav.Item>
-              <StyledNavLink to="/contact">Contact Us</StyledNavLink>
-            </Nav.Item>
+          <BootstrapNavbar.Collapse id="basic-navbar-nav">
+            <Nav className="ms-auto">
               <Nav.Item>
-                <StyledNavLink to="/donation">Donate Now</StyledNavLink>
+                <StyledNavLink to="/" end>Home</StyledNavLink>
               </Nav.Item>
-          </Nav>
-        </BootstrapNavbar.Collapse>
-      </Container>
-    </StyledNavbar>
+              <Nav.Item>
+                <StyledNavLink to="/about">About Us</StyledNavLink>
+              </Nav.Item>
+              <Nav.Item>
+                <StyledNavLink to="/impact">Impact</StyledNavLink>
+              </Nav.Item>
+              <Nav.Item>
+                <StyledNavLink to="/vision-mission">Vision & Mission</StyledNavLink>
+              </Nav.Item>
+              <Nav.Item>
+                <StyledNavLink to="/tender">Tender</StyledNavLink>
+              </Nav.Item>
+              <Nav.Item>
+                <StyledNavLink to="/our-supporters">Our Supporters</StyledNavLink>
+              </Nav.Item>
+              <Nav.Item>
+                <StyledNavLink to="/our-campaigns">Our Campaigns</StyledNavLink>
+              </Nav.Item>
+              {/* <Nav.Item>
+                <StyledNavLink to="/campaigns">Campaigns</StyledNavLink>
+              </Nav.Item> */}
+              {/* <Nav.Item>
+                <StyledNavLink to="/gallery">Gallery</StyledNavLink>
+              </Nav.Item> */}
+              <Nav.Item>
+                <StyledNavLink to="/contact">Contact Us</StyledNavLink>
+              </Nav.Item>
+              <Nav.Item>
+                <DonateNavLink to="/donation">Donate Now</DonateNavLink>
+              </Nav.Item>
+            </Nav>
+          </BootstrapNavbar.Collapse>
+        </Container>
+      </StyledNavbar>
+    </NavbarWrapper>
   );
 }
 

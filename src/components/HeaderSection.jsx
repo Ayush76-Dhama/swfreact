@@ -14,6 +14,8 @@ const HeroSection = styled(Row)`
   position: relative;
   overflow: hidden;
   width: 100%;
+  margin-top: 0;
+  padding-top: 140px; /* Increased padding to account for both TopBar and Navbar */
   
   /* Large devices (desktops, 1200px and up) */
   @media (min-width: 1200px) {
@@ -28,23 +30,24 @@ const HeroSection = styled(Row)`
   /* Small devices (landscape phones, 768px to 991px) */
   @media (max-width: 991px) {
     min-height: 80vh;
+    padding-top: 80px; /* Less padding for mobile where topbar is hidden */
   }
   
   /* Extra small devices (portrait phones, 576px to 767px) */
   @media (max-width: 767px) {
     min-height: 70vh;
+    padding-top: 80px;
   }
   
   /* Very small devices (small phones, less than 576px) */
   @media (max-width: 575px) {
     min-height: 60vh;
+    padding-top: 80px;
   }
 `;
 
 const StyledCarousel = styled(Carousel)`
-  position: absolute;
-  top: 0;
-  left: 0;
+  position: relative;
   width: 100%;
   height: 100%;
   z-index: 1;

@@ -101,10 +101,16 @@ const Footer = () => {
     setSuccess(false);
 
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/subscribe`, formData);
-      setSuccess(true);
-      setFormData({ email: '' });
+      const response = await axios.post(`${import.meta.env.VITE_API_URL || 'http://localhost:3000'}/api/subscribe`, formData);
+      
+      if (response.data.success) {
+        setSuccess(true);
+        setFormData({ email: '' });
+      } else {
+        setError(response.data.message || 'Error submitting form. Please try again.');
+      }
     } catch (err) {
+      console.error('Subscription error:', err);
       setError(err.response?.data?.message || 'Error submitting form. Please try again.');
     } finally {
       setLoading(false);
@@ -180,31 +186,31 @@ const Footer = () => {
             <Row>
               <Col xs={4} className="mb-2">
                 <GalleryImage
-                  src={'/images/img/gallery-1.jpg'}
+                  src={'/images/img/gallery-footer-7.jpg'}
                   alt={'gallery-1'}
                 />
               </Col>
               <Col xs={4} className="mb-2">
                 <GalleryImage
-                  src={'/images/img/gallery-2.jpg'}
+                  src={'/images/img/gallery-8.jpg'}
                   alt={'gallery-2'}
                 />
               </Col>
               <Col xs={4} className="mb-2">
                 <GalleryImage
-                  src={'/images/img/gallery-3.jpg'}
+                  src={'/images/img/gallery-10.jpg'}
                   alt={'gallery-3'}
                 />
               </Col>
               <Col xs={4} className="mb-2">
                 <GalleryImage
-                  src={'/images/img/gallery-4.jpg'}
+                  src={'/images/img/gallery-9.jpg'}
                   alt={'gallery-4'}
                 />
               </Col>
               <Col xs={4} className="mb-2">
                 <GalleryImage
-                  src={'/images/img/gallery-5.jpg'}
+                  src={'/images/img/gallery-7.jpg'}
                   alt={'gallery-5'}
                 />
               </Col>
