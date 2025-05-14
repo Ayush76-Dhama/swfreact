@@ -98,7 +98,7 @@ const NavbarToggle = styled(BootstrapNavbar.Toggle)`
   }
 `;
 
-const DonateNavLink = styled(StyledNavLink)`
+const DonateNavLink = styled(StyledNavLink)`  
   background: #dc3545;
   color: white !important;
   border: none;
