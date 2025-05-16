@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
