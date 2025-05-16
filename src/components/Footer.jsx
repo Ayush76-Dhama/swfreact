@@ -123,8 +123,11 @@ const Footer = () => {
         <Row>
           {/* Newsletter */}
           <Col md={3} sm={6} className="mb-4">
-            <FooterTitle>Newsletter</FooterTitle>
-            <p>
+            <FooterTitle>Newsletter</FooterTitle>console.log('FormData:', formData);
+console.log('Loading:', loading);
+console.log('Error:', error);
+console.log('Success:', success);
+            <p style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
               Subscribe to our newsletter to receive updates about our initiatives and events.
             </p>
             <Form className="mt-3" onSubmit={handleSubmit}>

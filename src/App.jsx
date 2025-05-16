@@ -100,6 +100,14 @@ const App = () => {
           </ProtectedRoute>
         }
       />
+      <Route 
+        path="/admin" 
+        element={
+          <ProtectedRoute>
+            <Navigate to="/admin/dashboard" replace />
+          </ProtectedRoute>
+        } 
+      />
     </Routes>
   );
 };

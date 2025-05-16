@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './AdminLogin.css';
 
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
+const API_URL = import.meta.env.VITE_API_URL; // Make URL configurable
 
 const AdminLogin = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -15,36 +15,41 @@ const AdminLogin = () => {
     setError('');
     setIsLoading(true);
 
-    console.log('Submitting credentials:', credentials);
-
     try {
-      const response = await fetch(`${API_URL}/api/admin/login`, {
+      const fullUrl = `${API_URL}/admin/login`;
+      console.log('Attempting login at:', fullUrl);
+      
+      const response = await fetch(fullUrl, {  // Remove /api if your backend doesn't use it
         method: 'POST',
         headers: {
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        credentials: 'include',
+        credentials: 'include', // Include cookies if needed
         body: JSON.stringify(credentials)
       });
 
-      const data = await response.json();
-      console.log('Response data:', data);
-
       if (!response.ok) {
-        console.error('Response error:', response);
-        throw new Error(data.message || 'Login failed');
+        const data = await response.json().catch(() => null);
+        throw new Error(data?.message || `HTTP error! status: ${response.status}`);
       }
 
-      if (!data.token) {
+      const data = await response.json();
+      
+      if (data.token) {
+        localStorage.setItem('adminToken', data.token);
+        navigate('/admin/dashboard', { state: { message: 'Login successful!' } });
+      } else {
         throw new Error('No token received from server');
       }
 
-      localStorage.setItem('adminToken', data.token);
-      navigate('/admin/dashboard', { state: { message: 'Login successful!' } });
-
     } catch (error) {
       console.error('Login error:', error);
-      setError(error.message);
+      setError(
+        error.message === 'Failed to fetch' 
+          ? 'Unable to connect to server. Please check your internet connection.'
+          : error.message || 'An unexpected error occurred'
+      );
     } finally {
       setIsLoading(false);
     }
