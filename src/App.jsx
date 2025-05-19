@@ -20,7 +20,7 @@ import Donation from './components/Donation';
 
 // Admin Components
 import AdminLogin from './components/admin/AdminLogin';
-import AdminSignup from './components/admin/AdminSignup';
+
 import AdminDashboard from './components/admin/AdminDashboard';
 import AboutSectionEditor from './components/admin/AboutSectionEditor';
 import PageContentEditor from './components/admin/PageContentEditor';
@@ -68,7 +68,7 @@ const App = () => {
 
       {/* Admin Routes */}
       <Route path="/admin/login" element={<AdminLogin />} />
-      <Route path="/admin/signup" element={<AdminSignup />} />
+     
       <Route
         path="/admin/dashboard"
         element={

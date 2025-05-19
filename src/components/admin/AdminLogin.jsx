@@ -104,9 +104,7 @@ const AdminLogin = () => {
             {isLoading ? 'Logging in...' : 'Login'}
           </button>
         </form>
-        <p>
-          Don't have an account? <Link to="/admin/signup">Sign up here</Link>
-        </p>
+        
       </div>
     </div>
   );
