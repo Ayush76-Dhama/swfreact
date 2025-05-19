@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import './AdminLogin.css';
+import ReactQuill from 'react-quill';
 
-const API_URL = import.meta.env.VITE_API_URL; // Make URL configurable
+const API_URL = import.meta.env.VITE_API_URL;
 
 const AdminLogin = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });
@@ -10,46 +11,62 @@ const AdminLogin = () => {
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // Check if API_URL is properly configured
+    if (!API_URL) {
+      console.error('API_URL is not defined in environment variables');
+      setError('API configuration error. Please contact administrator.');
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
     setIsLoading(true);
 
     try {
-      const fullUrl = `${API_URL}/admin/login`;
-      console.log('Attempting login at:', fullUrl);
+      if (!API_URL) {
+        throw new Error('API_URL is not defined. Check your .env file.');
+      }
+
+      console.log('Attempting to log in to:', `${API_URL}/api/admin/login`);
       
-      const response = await fetch(fullUrl, {  // Remove /api if your backend doesn't use it
+      const response = await fetch(`${API_URL}/api/admin/login`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          'Accept': 'application/json',
+          'Accept': 'application/json'
         },
-        credentials: 'include', // Include cookies if needed
-        body: JSON.stringify(credentials)
+        body: JSON.stringify(credentials),
       });
 
-      if (!response.ok) {
-        const data = await response.json().catch(() => null);
-        throw new Error(data?.message || `HTTP error! status: ${response.status}`);
-      }
+      // Log the response status
+      console.log('Response status:', response.status);
 
       const data = await response.json();
-      
+      console.log('Response data:', data);
+
+      if (!response.ok) {
+        throw new Error(data.message || `Server error: ${response.status}`);
+      }
+
       if (data.token) {
+        // Store token in localStorage
         localStorage.setItem('adminToken', data.token);
-        navigate('/admin/dashboard', { state: { message: 'Login successful!' } });
+        // Store admin info
+        localStorage.setItem('adminInfo', JSON.stringify(data.admin));
+        console.log('Login successful, redirecting...');
+        navigate('/admin/content');
       } else {
         throw new Error('No token received from server');
       }
-
-    } catch (error) {
-      console.error('Login error:', error);
-      setError(
-        error.message === 'Failed to fetch' 
-          ? 'Unable to connect to server. Please check your internet connection.'
-          : error.message || 'An unexpected error occurred'
-      );
+    } catch (err) {
+      console.error('Login error:', err);
+      if (err.message.includes('Failed to fetch')) {
+        setError('Unable to connect to server. Please check your internet connection or try again later.');
+      } else {
+        setError(err.message || 'Login failed. Please check your credentials.');
+      }
     } finally {
       setIsLoading(false);
     }
@@ -68,6 +85,8 @@ const AdminLogin = () => {
               value={credentials.email}
               onChange={(e) => setCredentials({ ...credentials, email: e.target.value })}
               required
+              placeholder="Enter your email"
+              disabled={isLoading}
             />
           </div>
           <div className="form-group">
@@ -77,13 +96,17 @@ const AdminLogin = () => {
               value={credentials.password}
               onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
               required
+              placeholder="Enter your password"
+              disabled={isLoading}
             />
           </div>
           <button type="submit" disabled={isLoading}>
             {isLoading ? 'Logging in...' : 'Login'}
           </button>
         </form>
-        <p>Don't have an account? <Link to="/admin/signup">Sign up here</Link></p>
+        <p>
+          Don't have an account? <Link to="/admin/signup">Sign up here</Link>
+        </p>
       </div>
     </div>
   );

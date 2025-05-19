@@ -25,6 +25,7 @@ import AdminDashboard from './components/admin/AdminDashboard';
 import AboutSectionEditor from './components/admin/AboutSectionEditor';
 import PageContentEditor from './components/admin/PageContentEditor';
 import AdminHomeEditor from './components/admin/AdminHomeEditor';
+import ContentEditor from './components/admin/ContentEditor';
 
 // Protected Route Component
 const ProtectedRoute = ({ children }) => {
@@ -81,6 +82,14 @@ const App = () => {
         element={
           <ProtectedRoute>
             <PageContentEditor />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/content-editor"
+        element={
+          <ProtectedRoute>
+            <ContentEditor />
           </ProtectedRoute>
         }
       />
