@@ -2,11 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './AdminLogin.css';
 
-<<<<<<< HEAD
-const API_URL = 'http://localhost:3000';
-=======
 const API_URL = import.meta.env.VITE_API_URL; // Make URL configurable
->>>>>>> 9579a508a870345d72149c5eda3e7b9ccd0d80fb
 
 const AdminLogin = () => {
   const [credentials, setCredentials] = useState({ email: '', password: '' });

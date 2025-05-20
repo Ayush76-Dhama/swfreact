@@ -6,7 +6,7 @@ import { faEnvelope, faPhone, faMapMarkerAlt } from '@fortawesome/free-solid-svg
 import { faFacebookF, faTwitter, faInstagram, faLinkedinIn } from '@fortawesome/free-brands-svg-icons';
 
 const TopBarWrapper = styled.div`
-  background-color: #FF4B6E;
+  background-color: #ec1f27;
   color: white;
   padding: 0.5rem 0;
   font-size: 0.9rem;
