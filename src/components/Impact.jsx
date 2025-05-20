@@ -1,5 +1,7 @@
 import React from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Navbar from './Navbar';
+import TopBar from './TopBar';
 // INSERT_YOUR_REWRITE_HERE
 import { Container, Row, Col, Card } from 'react-bootstrap';
 import styled from 'styled-components';
@@ -185,6 +187,8 @@ const AnimatedContainer = styled(motion.div)`
 const ImpactPage = () => {
   return (
     <div className="bg-white text-dark">
+      <TopBar />
+      <Navbar />
       <ImpactBannerResponsive>
         <img
           src="/images/navbar/impactweb.png"

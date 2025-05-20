@@ -3,6 +3,8 @@ import { Tab, Nav } from 'react-bootstrap';
 import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import { useLocation } from 'react-router-dom';
+import Navbar from './Navbar';
+import TopBar from './TopBar';
 
 const StyledSection = styled(motion.section)`
   background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
@@ -205,194 +207,190 @@ const AboutSection = () => {
 
   return (
     <>
-      {location.pathname === '/about' && (
-        <AboutBannerResponsive>
-          <img
-            src="/images/navbar/aboutuswebsite.png"
-            alt="About Us Banner Desktop"
-            className="about-banner-img desktop-only"
-          />
-          <img
-            src="/images/navbar/about us mobile.png"
-            alt="About Us Banner Mobile"
-            className="about-banner-img mobile-only"
-          />
-        </AboutBannerResponsive>
-      )}
-      <StyledSection
-        className="container-fluid py-5"
-        aria-label="About SheWings"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.5 }}
-      >
-      {location.pathname === '/about' && imageLoaded && (
-        <div className="text-center mb-4">
-          {/* <img 
-            src={imagePaths[currentImageIndex]}
-            className="img-fluid rounded-3 shadow-sm"
-            alt="About SheWings Foundation team and mission"
-            style={{ 
-              maxWidth: '100%', 
-              height: 'auto',
-              margin: '0 auto' 
-            }}
-            onError={tryNextImage}
-          /> */}
-        </div>
-      )}
-      <div className="container py-5">
-        <motion.div
-          className="row g-5"
-          initial="hidden"
-          animate={isVisible ? "visible" : "hidden"}
-          variants={staggerChildren}
+      <div style={{ position: 'fixed', top: 0, left: 0, right: 0, zIndex: 1000 }}>
+        <TopBar />
+        <Navbar />
+      </div>
+      <div style={{ marginTop: '120px' }}>
+        {location.pathname === '/about' && (
+          <AboutBannerResponsive>
+            <img
+              src="/images/navbar/aboutuswebsite.png"
+              alt="About Us Banner Desktop"
+              className="about-banner-img desktop-only"
+            />
+            <img
+              src="/images/navbar/about us mobile.png"
+              alt="About Us Banner Mobile"
+              className="about-banner-img mobile-only"
+            />
+          </AboutBannerResponsive>
+        )}
+        <StyledSection
+          className="container-fluid py-5"
+          aria-label="About SheWings"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.5 }}
         >
-          <motion.div className="col-xl-5" variants={fadeInUp}>
-            {renderImage('/images/img/about-3.jpg', 'About SheWings Foundation mission')}
-            {renderImage('/images/img/about-3.jpg', 'About SheWings Foundation team')}
-          </motion.div>
-          <motion.div className="col-xl-7" variants={fadeInUp}>
-            <ContentContainer className="ps-xl-5">
-              <div className="d-flex align-items-center mb-3">
-                <div className="me-3" style={{ width: '40px', height: '3px', background: 'linear-gradient(90deg, #3c4142 0%, 100%)' }}></div>
-                <h5 className="text-uppercase fw-bold mb-0" style={{ color: '#000000', letterSpacing: '2px' }}>About Us</h5>
-              </div>
-              <h1 className="mb-4 display-4 fw-bold" style={{ color: '#ec1f27' }}>
-                About SheWings Foundation
-              </h1>
-              <p className="text-muted mb-4" style={{ fontSize: '0.9rem' }}>
-                Image Source: <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" className="text-decoration-none">Unsplash</a>
-              </p>
-              <p className="fs-5 mb-4 text-muted">
-                At SheWings Foundation, our mission is simple yet powerful, to create healthier, happier, and empowered communities by addressing issues that impact women and their families. We believe in the strength of community, the power of knowledge, and the potential of every individual to bring about positive change.
-              </p>
-              <TabContainer>
-                <Tab.Container defaultActiveKey="tab-1">
-                  <StyledNav variant="pills" className="d-flex justify-content-center gap-3 mb-4">
-                    <Nav.Item>
-                      <Nav.Link eventKey="tab-1">About</Nav.Link>
-                    </Nav.Item>
-                    <Nav.Item>
-                      <Nav.Link eventKey="tab-4">Story</Nav.Link>
-                    </Nav.Item>
-                  </StyledNav>
-                  <Tab.Content>
-                    <Tab.Pane eventKey="tab-1">
-                      <div className="text-start my-auto">
-                        <h5 className="text-uppercase mb-3 mt-3 fw-bold">About SheWings Foundation</h5>
-                        <p className="mb-4 text-muted">
-                          At SheWings Foundation, we believe that access to health education and essential resources should be a universal right. Our foundation was created to address the deep-rooted lack of healthcare awareness, especially in areas where conversations around menstrual health, reproductive health, and maternal wellness are often limited or stigmatized.
-                        </p>
-                        <motion.a
-                          className="btn py-2 px-4 rounded-pill"
-                          href="/about-us"
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          style={{
-                            background: '#3c4142',
-                            color: 'white',
-                            boxShadow: '0 4px 15px rgba(108, 92, 231, 0.3)',
-                            border: 'none'
-                          }}
-                          whileHover={{ y: -3 }}
-                          whileTap={{ scale: 0.98 }}
-                        >
-                          Read More
-                        </motion.a>
-                      </div>
-                    </Tab.Pane>
-                    <Tab.Pane eventKey="tab-4">
-                      <div className="text-start my-auto">
-                        <h5 className="text-uppercase mb-3 mt-3 fw-bold">Our Campaigns</h5>
-                        <ul className="list-unstyled">
-                          {[
-                            { title: 'Woman Health Awareness Programme', link: 'https://zeenews.india.com/...' },
-                            { title: '#DonateOldBraPanty', link: 'https://newsroompost.com/...' },
-                            { title: '#RedDotCampaign', link: 'https://newsroompost.com/...' },
-                            { title: '#YesIBleed', link: 'https://newsroompost.com/...' },
-                            { title: '#FeedTheFuture', link: 'https://newsroompost.com/...' }
-                          ].map((item, index) => (
-                            <motion.li
-                              key={index}
-                              className="mb-3"
-                              whileHover={{ x: 5 }}
-                            >
-                              <a
-                                href={item.link}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-decoration-none text-dark d-flex align-items-center p-2 rounded"
-                                style={{
-                                  transition: 'all 0.3s ease',
-                                  backgroundColor: 'rgba(255, 255, 255, 0.5)'
-                                }}
-                              >
-                                <span className="me-2" style={{ color: '#6c5ce7' }}>→</span>
-                                <span>{item.title}</span>
-                              </a>
-                            </motion.li>
-                          ))}
-                          <motion.li
-                            className="mt-4"
-                            whileHover={{ y: -3 }}
-                          >
-                            <a
-                              href="https://www.youtube.com/watch?v=jnxrBBCg8Kg"
+          {location.pathname === '/about' && imageLoaded && (
+            <div className="text-center mb-4">
+              {/* Commented out image code */}
+            </div>
+          )}
+          <div className="container py-5">
+            <motion.div
+              className="row g-5"
+              initial="hidden"
+              animate={isVisible ? "visible" : "hidden"}
+              variants={staggerChildren}
+            >
+              <motion.div className="col-xl-5" variants={fadeInUp}>
+                {renderImage('/images/img/about-3.jpg', 'About SheWings Foundation mission')}
+                {renderImage('/images/img/about-3.jpg', 'About SheWings Foundation team')}
+              </motion.div>
+              <motion.div className="col-xl-7" variants={fadeInUp}>
+                <ContentContainer className="ps-xl-5">
+                  <div className="d-flex align-items-center mb-3">
+                    <div className="me-3" style={{ width: '40px', height: '3px', background: 'linear-gradient(90deg, #3c4142 0%, 100%)' }}></div>
+                    <h5 className="text-uppercase fw-bold mb-0" style={{ color: '#000000', letterSpacing: '2px' }}>About Us</h5>
+                  </div>
+                  <h1 className="mb-4 display-4 fw-bold" style={{ color: '#ec1f27' }}>
+                    About SheWings Foundation
+                  </h1>
+                  <p className="text-muted mb-4" style={{ fontSize: '0.9rem' }}>
+                    Image Source: <a href="https://unsplash.com" target="_blank" rel="noopener noreferrer" className="text-decoration-none">Unsplash</a>
+                  </p>
+                  <p className="fs-5 mb-4 text-muted">
+                    At SheWings Foundation, our mission is simple yet powerful, to create healthier, happier, and empowered communities by addressing issues that impact women and their families. We believe in the strength of community, the power of knowledge, and the potential of every individual to bring about positive change.
+                  </p>
+                  <TabContainer>
+                    <Tab.Container defaultActiveKey="tab-1">
+                      <StyledNav variant="pills" className="d-flex justify-content-center gap-3 mb-4">
+                        <Nav.Item>
+                          <Nav.Link eventKey="tab-1">About</Nav.Link>
+                        </Nav.Item>
+                        <Nav.Item>
+                          <Nav.Link eventKey="tab-4">Story</Nav.Link>
+                        </Nav.Item>
+                      </StyledNav>
+                      <Tab.Content>
+                        <Tab.Pane eventKey="tab-1">
+                          <div className="text-start my-auto">
+                            <h5 className="text-uppercase mb-3 mt-3 fw-bold">About SheWings Foundation</h5>
+                            <p className="mb-4 text-muted">
+                              At SheWings Foundation, we believe that access to health education and essential resources should be a universal right. Our foundation was created to address the deep-rooted lack of healthcare awareness, especially in areas where conversations around menstrual health, reproductive health, and maternal wellness are often limited or stigmatized.
+                            </p>
+                            <motion.a
+                              className="btn py-2 px-4 rounded-pill"
+                              href="/about-us"
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="btn py-2 px-4 rounded-pill d-inline-flex align-items-center"
                               style={{
                                 background: '#3c4142',
                                 color: 'white',
                                 boxShadow: '0 4px 15px rgba(108, 92, 231, 0.3)',
                                 border: 'none'
                               }}
+                              whileHover={{ y: -3 }}
+                              whileTap={{ scale: 0.98 }}
                             >
-                              <span className="me-2">▶</span>
-                              <span>Watch Video</span>
-                            </a>
-                          </motion.li>
-                        </ul>
-                      </div>
-                    </Tab.Pane>
-                  </Tab.Content>
-                </Tab.Container>
-              </TabContainer>
-            </ContentContainer>
-          </motion.div>
-        </motion.div>
-      </div>
-      {isDirectRoute && (
-        <div className="container-fluid py-5">
-          <div className="container py-5">
-            <h2 className="text-center mb-5 display-4 fw-bold" style={{
-              color:'#ec1f27',
-            }}>
-              Our Impact
-            </h2>
-            <div className="row justify-content-center g-4">
-              {[
-                "SheWings Foundation drives action and advocacy for lasting health change. We collaborate with experts and leaders to improve healthcare access, from menstrual hygiene in schools to workplace mental health programs...",
-                "Education is central to SheWings Foundation. We empower individuals with knowledge to make informed health decisions...",
-                "SheWings Foundation fosters supportive networks, uniting health professionals, educators, and advocates...",
-                "Join SheWings Foundation in creating a healthier future. Get involved through volunteering, donations, or partnerships..."
-              ].map((text, index) => (
-                <div className="col-md-6 col-lg-5" key={index}>
-                  <CardContainer>
-                    <div className="card p-4">
-                      <div className="card-body">
-                        <p className="card-text fs-5 text-muted">{text}</p>
-                      </div>
-                    </div>
-                  </CardContainer>
-                </div>
-              ))}
-            </div>
+                              Read More
+                            </motion.a>
+                          </div>
+                        </Tab.Pane>
+                        <Tab.Pane eventKey="tab-4">
+                          <div className="text-start my-auto">
+                            <h5 className="text-uppercase mb-3 mt-3 fw-bold">Our Campaigns</h5>
+                            <ul className="list-unstyled">
+                              {[
+                                { title: 'Woman Health Awareness Programme', link: 'https://zeenews.india.com/...' },
+                                { title: '#DonateOldBraPanty', link: 'https://newsroompost.com/...' },
+                                { title: '#RedDotCampaign', link: 'https://newsroompost.com/...' },
+                                { title: '#YesIBleed', link: 'https://newsroompost.com/...' },
+                                { title: '#FeedTheFuture', link: 'https://newsroompost.com/...' }
+                              ].map((item, index) => (
+                                <motion.li
+                                  key={index}
+                                  className="mb-3"
+                                  whileHover={{ x: 5 }}
+                                >
+                                  <a
+                                    href={item.link}
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="text-decoration-none text-dark d-flex align-items-center p-2 rounded"
+                                    style={{
+                                      transition: 'all 0.3s ease',
+                                      backgroundColor: 'rgba(255, 255, 255, 0.5)'
+                                    }}
+                                  >
+                                    <span className="me-2" style={{ color: '#6c5ce7' }}>→</span>
+                                    <span>{item.title}</span>
+                                  </a>
+                                </motion.li>
+                              ))}
+                              <motion.li
+                                className="mt-4"
+                                whileHover={{ y: -3 }}
+                              >
+                                <a
+                                  href="https://www.youtube.com/watch?v=jnxrBBCg8Kg"
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                  className="btn py-2 px-4 rounded-pill d-inline-flex align-items-center"
+                                  style={{
+                                    background: '#3c4142',
+                                    color: 'white',
+                                    boxShadow: '0 4px 15px rgba(108, 92, 231, 0.3)',
+                                    border: 'none'
+                                  }}
+                                >
+                                  <span className="me-2">▶</span>
+                                  <span>Watch Video</span>
+                                </a>
+                              </motion.li>
+                            </ul>
+                          </div>
+                        </Tab.Pane>
+                      </Tab.Content>
+                    </Tab.Container>
+                  </TabContainer>
+                </ContentContainer>
+              </motion.div>
+            </motion.div>
           </div>
-        </div>
-      )}
-    </StyledSection>
+          {isDirectRoute && (
+            <div className="container-fluid py-5">
+              <div className="container py-5">
+                <h2 className="text-center mb-5 display-4 fw-bold" style={{
+                  color:'#ec1f27',
+                }}>
+                  Our Impact
+                </h2>
+                <div className="row justify-content-center g-4">
+                  {[
+                    "SheWings Foundation drives action and advocacy for lasting health change. We collaborate with experts and leaders to improve healthcare access, from menstrual hygiene in schools to workplace mental health programs...",
+                    "Education is central to SheWings Foundation. We empower individuals with knowledge to make informed health decisions...",
+                    "SheWings Foundation fosters supportive networks, uniting health professionals, educators, and advocates...",
+                    "Join SheWings Foundation in creating a healthier future. Get involved through volunteering, donations, or partnerships..."
+                  ].map((text, index) => (
+                    <div className="col-md-6 col-lg-5" key={index}>
+                      <CardContainer>
+                        <div className="card p-4">
+                          <div className="card-body">
+                            <p className="card-text fs-5 text-muted">{text}</p>
+                          </div>
+                        </div>
+                      </CardContainer>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+        </StyledSection>
+      </div>
     </>
   );
 };

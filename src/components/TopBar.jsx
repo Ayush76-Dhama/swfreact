@@ -77,7 +77,7 @@ const TopBar = () => {
               </a>
               <a href="tel:+919876543210">
                 <FontAwesomeIcon icon={faPhone} />
-                +91 98765 43210
+                +91 8938827779
               </a>
               <a href="#">
                 <FontAwesomeIcon icon={faMapMarkerAlt} />
