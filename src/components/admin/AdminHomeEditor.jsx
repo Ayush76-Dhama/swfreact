@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
 import 'react-quill/dist/quill.snow.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useNavigate } from 'react-router-dom';
 
 const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
@@ -10,24 +11,47 @@ const AdminHomeEditor = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem('adminToken');
+    if (!token) {
+      navigate('/admin/login');
+      return;
+    }
+
     const fetchContent = async () => {
       setIsLoading(true);
       try {
-        const res = await fetch(`${API_URL}/api/admin/page-content/home`);
+        const res = await fetch(`${API_URL}/api/admin/page-content/home`, {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        });
+        
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        
         const data = await res.json();
         setContent(data.content || '');
-      } catch {
-        setError('Failed to load content');
+      } catch (err) {
+        setError('Failed to load content: ' + err.message);
+        console.error('Error loading content:', err);
       } finally {
         setIsLoading(false);
       }
     };
     fetchContent();
-  }, []);
+  }, [navigate]);
 
   const handleSave = async () => {
+    const token = localStorage.getItem('adminToken');
+    if (!token) {
+      navigate('/admin/login');
+      return;
+    }
+
     setIsLoading(true);
     setError('');
     setSuccess('');
@@ -36,14 +60,19 @@ const AdminHomeEditor = () => {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ content })
       });
-      if (!res.ok) throw new Error();
-      setSuccess('Content saved!');
-    } catch {
-      setError('Failed to save content');
+      
+      if (!res.ok) {
+        throw new Error(`HTTP error! status: ${res.status}`);
+      }
+      
+      setSuccess('Content saved successfully!');
+    } catch (err) {
+      setError('Failed to save content: ' + err.message);
+      console.error('Error saving content:', err);
     } finally {
       setIsLoading(false);
     }

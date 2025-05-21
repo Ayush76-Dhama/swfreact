@@ -16,7 +16,8 @@ const ContentEditor = ({
     setError('');
     try {
       await onSave(content);
-    } catch (err) {
+    } catch (error) {
+      console.error('Save failed:', error);
       setError('Failed to save changes. Please try again.');
     } finally {
       setIsSaving(false);
@@ -48,7 +49,8 @@ const ContentEditor = ({
       
       const imageTag = `<img src="${imageUrl}" alt="Uploaded image" />`;
       setContent(prev => prev + imageTag);
-    } catch (err) {
+    } catch (error) {
+      console.error('Image upload failed:', error);
       setError('Failed to upload image. Please try again.');
     }
   };

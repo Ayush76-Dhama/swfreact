@@ -34,26 +34,29 @@ const PageContentEditor = () => {
   }, [navigate]);
 
   const handlePageSelect = async (pageId) => {
+    if (!pageId) return;
+    
     setSelectedPage(pageId);
     setIsLoading(true);
     setError('');
     setSuccess('');
 
     try {
+      const token = localStorage.getItem('adminToken');
       const response = await fetch(`${API_URL}/api/admin/page-content/${pageId}`, {
         headers: {
-          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+          'Authorization': `Bearer ${token}`
         }
       });
 
       if (!response.ok) {
-        throw new Error('Failed to fetch page content');
+        throw new Error(`Failed to fetch page content: ${response.status}`);
       }
 
       const data = await response.json();
       setContent(data.content || '');
     } catch (err) {
-      setError('Failed to load page content. Please try again.');
+      setError('Failed to load page content: ' + err.message);
       console.error('Error loading page content:', err);
     } finally {
       setIsLoading(false);
@@ -71,22 +74,25 @@ const PageContentEditor = () => {
     setSuccess('');
 
     try {
+      const token = localStorage.getItem('adminToken');
       const response = await fetch(`${API_URL}/api/admin/page-content/${selectedPage}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          'Authorization': `Bearer ${localStorage.getItem('adminToken')}`
+          'Authorization': `Bearer ${token}`
         },
         body: JSON.stringify({ content })
       });
 
       if (!response.ok) {
-        throw new Error('Failed to save content');
+        throw new Error(`Failed to save content: ${response.status}`);
       }
 
+      const data = await response.json();
+      setContent(data.content);
       setSuccess('Content saved successfully!');
     } catch (err) {
-      setError('Failed to save content. Please try again.');
+      setError('Failed to save content: ' + err.message);
       console.error('Error saving content:', err);
     } finally {
       setIsLoading(false);

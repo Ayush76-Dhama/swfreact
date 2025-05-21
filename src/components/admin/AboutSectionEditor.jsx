@@ -1,23 +1,42 @@
 import React, { useState, useEffect } from 'react';
 import ContentEditor from './ContentEditor';
+import { useNavigate } from 'react-router-dom';
+
+const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000';
 
 const AboutSectionEditor = () => {
   const [content, setContent] = useState('');
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
+    const token = localStorage.getItem('adminToken');
+    if (!token) {
+      navigate('/admin/login');
+      return;
+    }
     fetchContent();
-  }, []);
+  }, [navigate]);
 
   const fetchContent = async () => {
     try {
-      const response = await fetch('/api/admin/about-content');
-      if (!response.ok) throw new Error('Failed to fetch content');
+      const token = localStorage.getItem('adminToken');
+      const response = await fetch(`${API_URL}/api/admin/page-content/about`, {
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      
       const data = await response.json();
-      setContent(data.content);
+      setContent(data.content || '');
     } catch (err) {
-      setError('Failed to load content. Please try again.');
+      setError('Failed to load content: ' + err.message);
+      console.error('Error loading content:', err);
     } finally {
       setLoading(false);
     }
@@ -25,16 +44,31 @@ const AboutSectionEditor = () => {
 
   const handleSave = async (newContent) => {
     try {
-      await fetch('/api/admin/about-content', {
+      const token = localStorage.getItem('adminToken');
+      if (!token) {
+        navigate('/admin/login');
+        return;
+      }
+
+      const response = await fetch(`${API_URL}/api/admin/page-content/about`, {
         method: 'PUT',
-        headers: { 'Content-Type': 'application/json' },
+        headers: { 
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`
+        },
         body: JSON.stringify({ content: newContent }),
       });
-      
-      // Show success message or handle success state
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setContent(data.content);
       alert('Content saved successfully!');
     } catch (err) {
-      throw new Error('Failed to save content');
+      console.error('Error saving content:', err);
+      throw new Error('Failed to save content: ' + err.message);
     }
   };
 
